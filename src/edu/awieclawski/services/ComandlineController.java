@@ -181,13 +181,17 @@ public class ComandlineController {
 	 * Presents list of nearest prime numbers
 	 */
 	private void nearestPrimeNumbersPropositions() {
-		List<Integer> list = new Calculator().nearestPrimeNumberList(input);
-		if (list != null)
-			print("Nearest prime numbers proposition: " + list.toString());
+		if (input > 0) {
+			List<Integer> list = new Calculator().nearestPrimeNumberList(input);
+			if (list != null)
+				print("Nearest prime number propositions: " + list.toString());
+		} else
+			print("Probably no input number: " + input);
 	}
 
 	/**
 	 * Simple print line at console
+	 * 
 	 * @param txt
 	 */
 	private void print(String txt) {
