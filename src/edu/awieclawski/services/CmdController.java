@@ -9,11 +9,12 @@ import edu.awieclawski.exceptions.NoPrimeNumberException;
 import edu.awieclawski.exceptions.NumberOutOfListException;
 import edu.awieclawski.utils.Calculator;
 
-public class ComandlineController {
+public class CmdController {
 
-	Calculator c = new Calculator();
-	Scanner scan = new Scanner(System.in);
-	private int input = -1;
+	private Calculator c = new Calculator();
+	private Scanner scanNumbers = new Scanner(System.in);
+	private Scanner scanString = new Scanner(System.in);
+	private int inputInt = -1;
 
 	/**
 	 * asks the user to enter a prime number.
@@ -27,10 +28,10 @@ public class ComandlineController {
 		int x = 0;
 		System.out.println("Please enter a prime number for " + desc + ": ");
 		try {
-			input = scan.nextInt();
-			x = input;
+			inputInt = scanNumbers.nextInt();
+			x = inputInt;
 		} catch (InputMismatchException e) {
-			scan.next();
+			scanNumbers.next();
 			throw new InputMismatchException();
 		}
 		if (!c.isPrimeNumber(x))
@@ -83,7 +84,7 @@ public class ComandlineController {
 			} catch (NegativeNumberException e) {
 				print(e.getMessage());
 			} catch (InputMismatchException e) {
-				print(e.getMessage());
+				print("It is not correct input!");
 			}
 		}
 		return n;
@@ -99,10 +100,10 @@ public class ComandlineController {
 		int x = 0;
 		System.out.println("Please enter any number " + desc + ": ");
 		try {
-			int n = scan.nextInt();
+			int n = scanNumbers.nextInt();
 			x = n;
 		} catch (InputMismatchException e) {
-			scan.next();
+			scanNumbers.next();
 			throw new InputMismatchException();
 		}
 		if (x < 0)
@@ -149,10 +150,10 @@ public class ComandlineController {
 		int n = 0;
 		System.out.println("Please enter any number " + desc + ": ");
 		try {
-			n = scan.nextInt();
+			n = scanNumbers.nextInt();
 			x = n;
 		} catch (InputMismatchException e) {
-			scan.next();
+			scanNumbers.next();
 			throw new InputMismatchException();
 		}
 		if (x < 0)
@@ -181,12 +182,43 @@ public class ComandlineController {
 	 * Presents list of nearest prime numbers
 	 */
 	private void nearestPrimeNumbersPropositions() {
-		if (input > 0) {
-			List<Integer> list = new Calculator().nearestPrimeNumberList(input);
+		if (inputInt > 0) {
+			List<Integer> list = new Calculator().nearestPrimeNumberList(inputInt);
 			if (list != null)
 				print("Nearest prime number propositions: " + list.toString());
 		} else
-			print("Probably no input number: " + input);
+			print("Probably no input number: " + inputInt);
+	}
+
+	/**
+	 * 
+	 * @param txt
+	 * @return String
+	 * 
+	 */
+	public String getAnyString(String txt) {
+		boolean finish = false;
+		String n = "";
+		while (!finish) {
+			String m = inputAnyString(txt);
+			n = m;
+			finish = true;
+		}
+		return n;
+	}
+
+	/**
+	 * 
+	 * @param desc
+	 * @return String
+	 * 
+	 */
+	private String inputAnyString(String desc) {
+		String txt = "";
+		System.out.println("Please enter any text " + desc + ": ");
+		String n = scanString.nextLine();
+		txt = n;
+		return txt;
 	}
 
 	/**

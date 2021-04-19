@@ -103,6 +103,24 @@ public class Calculator {
 	}
 
 	/**
+	 * check if 'e' is coprime number. returns int > 0 if true.
+	 * 
+	 * @param n
+	 * @param e, public key part
+	 * @return int, 
+	 */
+	public int isCoPrime(int n, int e) {
+		int result = -1;
+		if (n == 1)
+			result = n;
+		else if (gcd(e, n) == 1) {
+			
+			result = e;
+		}
+		return result;
+	}
+
+	/**
 	 * generates a private key 'd' using the public key 'e' and the product the
 	 * initial prime numbers 'p' and 'q' .
 	 * 
