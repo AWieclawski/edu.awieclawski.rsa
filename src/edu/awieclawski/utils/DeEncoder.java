@@ -3,7 +3,7 @@ package edu.awieclawski.utils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Encoder {
+public class DeEncoder {
 
 	/**
 	 * simple Character to ASCII decoder

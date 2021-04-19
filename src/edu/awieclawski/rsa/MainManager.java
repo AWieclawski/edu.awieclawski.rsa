@@ -9,9 +9,9 @@ import edu.awieclawski.exceptions.NegativeNumberException;
 import edu.awieclawski.exceptions.NoPrimeNumberException;
 import edu.awieclawski.services.CmdController;
 import edu.awieclawski.utils.Calculator;
-import edu.awieclawski.utils.Encoder;
+import edu.awieclawski.utils.DeEncoder;
 
-public class RsaGenEncoder {
+public class MainManager {
 
 	private static List<Integer> results = new ArrayList<>();
 	private static List<Integer> asciiList = new ArrayList<>();
@@ -25,7 +25,7 @@ public class RsaGenEncoder {
 	public static void main(String[] args)
 			throws NoPrimeNumberException, NegativeNumberException, InputMismatchException {
 		CmdController cmdo = new CmdController();
-		Encoder enc = new Encoder();
+		DeEncoder enc = new DeEncoder();
 
 		int p = cmdo.getPrimeNumber("p");
 		int q = cmdo.getPrimeNumber("q");
