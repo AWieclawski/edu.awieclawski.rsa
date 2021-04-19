@@ -107,16 +107,16 @@ public class Calculator {
 	 * 
 	 * @param n
 	 * @param e, public key part
-	 * @return int, 
+	 * @return int,
 	 */
 	public int isCoPrime(int n, int e) {
 		int result = -1;
 		if (n == 1)
 			result = n;
 		else if (gcd(e, n) == 1) {
-			
 			result = e;
 		}
+//		System.out.println(">>n=" + n + "e=" + e);
 		return result;
 	}
 
@@ -129,12 +129,18 @@ public class Calculator {
 	 * @return ind, d
 	 */
 	public int privateKeyGenerator(int e, int n) {
-		do {
-			for (int i = 2; i < phiEuler(n); i++) {
-				if (i * e % phiEuler(n) == 1)
-					return i;
-			}
-		} while (true);
+		int result = -1;
+		for (int i = 2; i < phiEuler(n); i++) {
+			// progress points
+			if (i % 100 == 0)
+				System.out.print(".");
+			if (i % 10000 == 0)
+				System.out.println(".");
+			if (i * e % phiEuler(n) == 1)
+				result = i;
+		}
+		System.out.println(".");
+		return result;
 	}
 
 }

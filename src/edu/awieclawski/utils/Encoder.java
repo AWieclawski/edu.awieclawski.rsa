@@ -39,7 +39,21 @@ public class Encoder {
 	}
 
 	/**
+	 * 
+	 * @param listInput, List<Integer> of decoded numbers
+	 * @return String, decoded text
+	 */
+	public String getStringFromAscii(List<Integer> listInput) {
+		String result = "";
+		for (int i : listInput) {
+			result += Character.toString((char) i);
+		}
+		return result;
+	}
+
+	/**
 	 * seems complicated but it works ;)
+	 * http://www.algorytm.org/algorytmy-arytmetyczne/szybkie-potegowanie-modularne/spm-j.html
 	 * 
 	 * @param a, int source number
 	 * @param e, int public key part
