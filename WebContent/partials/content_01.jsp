@@ -21,7 +21,7 @@
 
 	<div class="calculation">
 
-		<form action="/rsa-step-one" method="post">
+		<form action="${contextPath}/rsa-step-one" method="post">
 
 			<div class="submits">
 
@@ -32,15 +32,16 @@
 
 			<h3>Step 1. Compute N as the product of two prime numbers 'p' and 'q':</h3>
 
-			<label for="p">Primary number 'p' (between 1 and 1000):</label>
+			<label for="pNumber">Primary number 'p' (between 1 and 1000):</label>
 
 			<input type="number" id="pNumber" name="pNumber" min="1" max="1000">
 
 			<br> 
 			
-			<label for="q">Primary number 'q' (between 1 and 1000):</label> 
+			<label for="qNumber">Primary number 'q' (between 1 and 1000):</label> 
 
 			<input type="number" id="qNumber" name="qNumber" min="1" max="1000">
+			
 
 		</form>
 

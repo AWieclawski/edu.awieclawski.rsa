@@ -1,4 +1,4 @@
-package edu.awieclawski.web;
+package edu.awieclawski.web.servlets;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
