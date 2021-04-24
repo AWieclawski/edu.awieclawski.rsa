@@ -1,1 +1,6 @@
-http://localhost:8080/edu.awieclawski.rsa/welcome
+Instruction:
+1. Install Tomcat 8.0 in <$ECLIPSE_WORKSSPACE>/tomcat80
+2. Add <$ECLIPSE_WORKSSPACE>/tomcat80/lib/servlet-api.jar 
+to the Project Java BuildPath libraries
+3. Add the Project to the Server in the Server Eclipse tab
+4. Deploy & visit at http://localhost:8080/edu.awieclawski.rsa/welcome
