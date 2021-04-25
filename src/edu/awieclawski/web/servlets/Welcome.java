@@ -28,7 +28,12 @@ public class Welcome extends HttpServlet {
 			throws ServletException, IOException {
 		String contextPath = request.getContextPath();
 		HttpSession session = request.getSession();
-		session.setAttribute("contextPath",contextPath);
+
+		session.setAttribute("contextPath_A",contextPath);
+		
+		// reset infoBar messages
+		session.removeAttribute("error_A");
+		session.removeAttribute("info_A");
 
 		response.setContentType("text/html");
 		request.getRequestDispatcher("welcome.jsp").forward(request, response);
