@@ -1,6 +1,7 @@
 package edu.awieclawski.web.utils;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -30,6 +31,7 @@ public class NumberUtil {
 				result.setIntResult(x);
 			} catch (NoPrimeNumberException e) {
 				result.setError(e.getMessage() + "=" + number);
+				result.setInfo(nearestPrimeNumbersPropositions(number));
 				LOGGER.log(Level.SEVERE, e.getMessage() + "=" + number, e);
 			} catch (NegativeNumberException e) {
 				result.setError(e.getMessage() + "=" + number);
@@ -77,6 +79,25 @@ public class NumberUtil {
 		if (str != null)
 			return str != null && str.matches("[0-9.]+");
 		return false;
+	}
+
+	/**
+	 * Presents list of nearest prime numbers
+	 * 
+	 * @param inputInt, int @return, List<Integer>
+	 */
+	private String nearestPrimeNumbersPropositions(int inputInt) {
+		List<Integer> list = null;
+		String result = "";
+		if (inputInt > 0) {
+			list = new Calculator().nearestPrimeNumberList(inputInt);
+			if (list != null) {
+				result = "Nearest prime number propositions for " + inputInt + ":" + list.toString();
+				LOGGER.log(Level.INFO, result);
+			}
+		} else
+			LOGGER.log(Level.SEVERE, "Probably no input number: " + inputInt);
+		return result;
 	}
 
 }

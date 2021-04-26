@@ -16,10 +16,11 @@ body {
 
 .infobar {
 	background-color: #222222;
-	padding: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 10px;
 	color: white;
 	position: sticky;
-	height: 18px;
 }
 
 .content {
