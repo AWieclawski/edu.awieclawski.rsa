@@ -117,7 +117,7 @@ public class Calculator {
 		int result = -1;
 		if (n == 1)
 			result = n;
-		else if (gcd(e, n) == 1) {
+		else if (gcd(n, e) == 1) {
 			result = e;
 		}
 //		System.out.println(">>n=" + n + "e=" + e);
@@ -132,7 +132,7 @@ public class Calculator {
 	 * @param n
 	 * @return int, d
 	 */
-	public int privateKeyGenerator(int e, int n) {
+	public int privateKeyGenerator(int n,int e) {
 		int result = -1;
 		for (int i = 2; i < phiEuler(n); i++) {
 			// progress points

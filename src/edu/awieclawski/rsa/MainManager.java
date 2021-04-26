@@ -49,7 +49,7 @@ public class MainManager {
 			} else
 				System.out.println("OK." + e + " is co-prime");
 			publicKey[0] = e;
-			d = calc.privateKeyGenerator(e, n);
+			d = calc.privateKeyGenerator(n, e);
 			if (d < 0) {
 				System.out.println("Ops! privateKey can not be calculated for e=" + e);
 				if (cmdo.getAnyString(", or 'y' to auto-calculate").equals("y"))
@@ -82,7 +82,7 @@ public class MainManager {
 
 	}
 
-	private static int autoSearchRSAkey(int e, int n) {
+	private static int autoSearchRSAkey(int n, int e) {
 		int result = -1;
 		int d = -1;
 		int ip = -1;
@@ -94,7 +94,7 @@ public class MainManager {
 //			System.out.println("e=" + e);
 		}
 		while (d < 0 || e > n) {
-			d = calc.privateKeyGenerator(e, n);
+			d = calc.privateKeyGenerator(n, e);
 			if (d < 0)
 				e++;
 //			System.out.println("e=" + d + ",d=" + e);

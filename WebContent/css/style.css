@@ -51,6 +51,11 @@ body {
 	width: 90%;
 }
 
+.results {
+	padding: 5px;
+	text-align: right;
+}
+
 .submits{
 	padding: 5px;
 	text-align: center;

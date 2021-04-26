@@ -1,6 +1,7 @@
 package edu.awieclawski.web.utils;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -100,6 +101,38 @@ public class NumberUtil {
 		} else
 			LOGGER.log(Level.SEVERE, "Probably no input number: " + inputInt);
 		return result;
+	}
+
+	public int phiEuler(int n) {
+		Calculator c = new Calculator();
+		return c.phiEuler(n);
+	}
+
+	/**
+	 * check if 'e' is co-prime number, 
+	 * @param n
+	 * @param e
+	 * @return
+	 */
+	public MessageService getCoPrimeAndMsg(int n, int e) {
+		MessageService result = new MessageService(-1, null, null);
+		int x = -1;
+		Calculator c = new Calculator();
+		x = c.isCoPrime(n, e);
+		if (x > 0)
+			result.setIntResult(x);
+		else {
+			List<Integer> list = new ArrayList<>();
+			list = c.phiList(phiEuler(n), e);
+			if (list != null)
+				result.setInfo(list.toString());
+		}
+		return result;
+	}
+
+	public int privateKeyGenerator(int e, int n) {
+		Calculator c = new Calculator();
+		return c.privateKeyGenerator(e, n);
 	}
 
 }
