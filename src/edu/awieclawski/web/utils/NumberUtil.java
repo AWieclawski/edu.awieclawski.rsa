@@ -20,13 +20,13 @@ import edu.awieclawski.web.service.MessageService;
 public class NumberUtil {
 	private final static Logger LOGGER = Logger.getLogger(NumberUtil.class.getName());
 
-	public MessageService primeNumbersHandling(Integer number) throws ServletException, IOException {
+	public MessageService getPrimeNumberAndMsgs(Integer number) throws ServletException, IOException {
 		Integer x = -1;
 		MessageService result = new MessageService(x, null, null);
 
 		if (number != null) {
 			try {
-				x = primeNumberService(number);
+				x = isPrimeNumberCheck(number);
 				result.setIntResult(x);
 			} catch (NoPrimeNumberException e) {
 				result.setError(e.getMessage() + "=" + number);
@@ -42,7 +42,7 @@ public class NumberUtil {
 		return result;
 	}
 
-	private Integer primeNumberService(Integer number) throws NoPrimeNumberException, NegativeNumberException {
+	private Integer isPrimeNumberCheck(Integer number) throws NoPrimeNumberException, NegativeNumberException {
 		Calculator c = new Calculator();
 		Integer x = -1;
 
@@ -59,7 +59,7 @@ public class NumberUtil {
 		return x;
 	}
 
-	public MessageService getIntFromString(String txt) {
+	public MessageService getIntFromStringAndMsg(String txt) {
 		MessageService result = new MessageService(-1, null, null);
 
 		if (isNumeric(txt))

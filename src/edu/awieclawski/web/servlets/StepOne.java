@@ -79,9 +79,9 @@ public class StepOne extends HttpServlet {
 		session.removeAttribute(Attributes.INFO_A.getName());
 
 		pqMap.put(Attributes.P_NUM_A.getName(),
-				nUtil.getIntFromString((String) request.getParameter(Attributes.P_NUM_A.getParam())));
+				nUtil.getIntFromStringAndMsg((String) request.getParameter(Attributes.P_NUM_A.getParam())));
 		pqMap.put(Attributes.Q_NUM_A.getName(),
-				nUtil.getIntFromString((String) request.getParameter(Attributes.Q_NUM_A.getParam())));
+				nUtil.getIntFromStringAndMsg((String) request.getParameter(Attributes.Q_NUM_A.getParam())));
 		controlSum = pqMap.size();
 
 		if (pqMap != null)
@@ -94,7 +94,7 @@ public class StepOne extends HttpServlet {
 					session.setAttribute(Attributes.INFO_A.getName(), getActualInfoByString(thisMsgServ.getInfo()));
 					m_infComm = getActualInfoByString(thisMsgServ.getInfo());
 				} else {
-					thisMsgServ = nUtil.primeNumbersHandling(numberInt);
+					thisMsgServ = nUtil.getPrimeNumberAndMsgs(numberInt);
 					int numberValid = thisMsgServ.getIntResult();
 					if (numberValid > 0) { // OK - is Prime
 						session.setAttribute(entry.getKey(), numberValid);
