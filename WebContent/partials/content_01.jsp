@@ -1,8 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	
+<%@ page import="edu.awieclawski.web.models.Attributes" %>
+	
 <%
 	String ctx = request.getContextPath();
+	Integer p_A = (Integer) session.getAttribute(Attributes.P_NUM_A.getName());
+	Integer q_A = (Integer) session.getAttribute(Attributes.Q_NUM_A.getName());
+	String p_P = Attributes.P_NUM_A.getParam();
+	String q_P = Attributes.Q_NUM_A.getParam();
 %>
 
 <div id="left">
@@ -35,16 +41,32 @@
 			</div>
 
 			<h3>Step 1. Compute N as the product of two prime numbers 'p' and 'q':</h3>
+			
+			<% if (p_A != null) { %>
+			
+			Primary number 'p' = <%= p_A %>
+			
+			<% } else { %>
 
-			<label for="pNumber_P">Primary number 'p' (between 1 and 1000):</label>
+			<label for="<%=p_P%>">Primary number 'p' (between 1 and 1000):</label>
 
-			<input type="number" id="pNumber_P" name="pNumber_P" min="1" max="1000">
+			<input type="number" id="<%=p_P%>" name="<%=p_P%>" min="1" max="1000">
+			
+			<% } %>
 
 			<br> 
 			
-			<label for="qNumber_P">Primary number 'q' (between 1 and 1000):</label> 
+			<% if (q_A != null) { %>
+			
+			Primary number 'q' = <%= q_A %>
+			
+			<% } else { %>			
+			
+			<label for="<%=q_P%>">Primary number 'q' (between 1 and 1000):</label> 
 
-			<input type="number" id="qNumber_P" name="qNumber_P" min="1" max="1000">
+			<input type="number" id="<%=q_P%>" name="<%=q_P%>" min="1" max="1000">
+			
+			<% } %>			
 			
 		</form>
 

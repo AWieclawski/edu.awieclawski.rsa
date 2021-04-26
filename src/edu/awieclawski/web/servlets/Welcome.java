@@ -16,7 +16,7 @@ import edu.awieclawski.web.models.Attributes;
 @WebServlet("/welcome")
 public class Welcome extends HttpServlet {
 	private static final long serialVersionUID = -1501795724394672406L;
-	
+
 	private String m_ctxPth = null;
 
 	/**
@@ -33,11 +33,13 @@ public class Welcome extends HttpServlet {
 		m_ctxPth = request.getContextPath();
 		HttpSession session = request.getSession();
 
-		session.setAttribute(Attributes.CTX_PTH_A.getName(),m_ctxPth);
-		
+		session.setAttribute(Attributes.CTX_PTH_A.getName(), m_ctxPth);
+
 		// reset infoBar messages
 		session.removeAttribute(Attributes.ERROR_A.getName());
 		session.removeAttribute(Attributes.INFO_A.getName());
+		session.removeAttribute(Attributes.P_NUM_A.getName());
+		session.removeAttribute(Attributes.Q_NUM_A.getName());
 
 		response.setContentType("text/html");
 		request.getRequestDispatcher("welcome.jsp").forward(request, response);

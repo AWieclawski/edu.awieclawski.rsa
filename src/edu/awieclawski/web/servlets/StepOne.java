@@ -1,6 +1,7 @@
 package edu.awieclawski.web.servlets;
 
 import java.io.IOException;
+import java.util.Enumeration;
 //import java.util.Arrays;
 //import java.util.Enumeration;
 import java.util.HashMap;
@@ -49,6 +50,15 @@ public class StepOne extends HttpServlet {
 			throws ServletException, IOException {
 		m_ctxPth = request.getContextPath();
 
+		// log list of Attributes
+		HttpSession session = request.getSession(false);
+		Enumeration<String> attributeNames = session.getAttributeNames();
+		LOGGER.log(Level.INFO, "\n ** Attribute List ** ");
+		while (attributeNames.hasMoreElements()) {
+			String tmpAttr = attributeNames.nextElement();
+			LOGGER.log(Level.INFO, " -- attribute=" + tmpAttr + ",value=" + session.getAttribute(tmpAttr));
+		}
+
 		response.setContentType("text/html");
 		request.getRequestDispatcher("/pages/step_one.jsp").forward(request, response);
 	}
@@ -68,8 +78,10 @@ public class StepOne extends HttpServlet {
 		session.removeAttribute(Attributes.ERROR_A.getName());
 		session.removeAttribute(Attributes.INFO_A.getName());
 
-		pqMap.put("pNumber_A", nUtil.getIntFromString((String) request.getParameter("pNumber_P")));
-		pqMap.put("qNumber_A", nUtil.getIntFromString((String) request.getParameter("qNumber_P")));
+		pqMap.put(Attributes.P_NUM_A.getName(),
+				nUtil.getIntFromString((String) request.getParameter(Attributes.P_NUM_A.getParam())));
+		pqMap.put(Attributes.Q_NUM_A.getName(),
+				nUtil.getIntFromString((String) request.getParameter(Attributes.Q_NUM_A.getParam())));
 		controlSum = pqMap.size();
 
 		if (pqMap != null)
@@ -77,12 +89,10 @@ public class StepOne extends HttpServlet {
 				MessageService thisMsgServ = entry.getValue();
 				int numberInt = thisMsgServ.getIntResult();
 				if (numberInt < 0) { // not integer
-					session.setAttribute(Attributes.ERROR_A.getName(),
-							getActualErrorByString(thisMsgServ.getError()));
+					session.setAttribute(Attributes.ERROR_A.getName(), getActualErrorByString(thisMsgServ.getError()));
 					m_errComm = getActualErrorByString(thisMsgServ.getError());
 					session.setAttribute(Attributes.INFO_A.getName(), getActualInfoByString(thisMsgServ.getInfo()));
 					m_infComm = getActualInfoByString(thisMsgServ.getInfo());
-					session.removeAttribute(entry.getKey());
 				} else {
 					thisMsgServ = nUtil.primeNumbersHandling(numberInt);
 					int numberValid = thisMsgServ.getIntResult();
@@ -90,8 +100,8 @@ public class StepOne extends HttpServlet {
 						session.setAttribute(entry.getKey(), numberValid);
 						count++;
 
-						LOGGER.log(Level.INFO,
-								"key=" + entry.getKey() + ",numberValid=" + numberValid + ",count=" + count+",controlSum="+controlSum);
+						LOGGER.log(Level.INFO, "key=" + entry.getKey() + ",numberValid=" + numberValid + ",count="
+								+ count + ",controlSum=" + controlSum);
 
 					} else {
 						thisMsgServ = getActualMsgServByMsgServ(thisMsgServ, entry);
@@ -99,31 +109,14 @@ public class StepOne extends HttpServlet {
 						session.setAttribute(Attributes.ERROR_A.getName(),
 								getActualErrorByString(thisMsgServ.getError()));
 						m_errComm = getActualErrorByString(thisMsgServ.getError());
-						session.setAttribute(Attributes.INFO_A.getName(),
-								getActualInfoByString(thisMsgServ.getInfo()));
+						session.setAttribute(Attributes.INFO_A.getName(), getActualInfoByString(thisMsgServ.getInfo()));
 						m_infComm = getActualInfoByString(thisMsgServ.getInfo());
-						session.removeAttribute(entry.getKey());
 					}
 				}
 			}
 
-//		if (pqMap != null)
-//			LOGGER.log(Level.INFO, "pqMap=" + pqMap.toString());
-//
-//		for (Map.Entry<String, String[]> entry : request.getParameterMap().entrySet()) {
-//			LOGGER.log(Level.INFO,
-//					" -- parameter=" + entry.getKey() + ": " + Arrays.toString(entry.getValue()) + "</p>");
-//		}
-//
-//		Enumeration<String> attributeNames = session.getAttributeNames();
-//		while (attributeNames.hasMoreElements()) {
-//			String tmpAttr = attributeNames.nextElement();
-//			LOGGER.log(Level.INFO, " --- attribute=" + tmpAttr + ",value=" + session.getAttribute(tmpAttr));
-//		}
-
 		// pass-to logic
 		if (controlSum == count) { // next step if all map lines are ok
-			session.setAttribute("pqNumbersMap", pqMap);
 			response.sendRedirect(m_ctxPth + "/rsa-step-two");
 		} else {
 			response.sendRedirect(m_ctxPth + "/rsa-step-one");
@@ -154,7 +147,7 @@ public class StepOne extends HttpServlet {
 				newMsgValue = msgServ.getInfo();
 
 			result = msgServ;
-			msgServ.setInfo(newMsgValue);			
+			msgServ.setInfo(newMsgValue);
 		}
 		return result;
 	}
