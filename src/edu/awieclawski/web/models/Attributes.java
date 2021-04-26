@@ -22,4 +22,8 @@ public enum Attributes {
 		return name;
 	}
 
+	public String getParam() {
+		return param;
+	}
+
 }

@@ -19,20 +19,21 @@ body {
 	padding: 10px;
 	color: white;
 	position: sticky;
+	height: 18px;
 }
 
 .content {
 	background-color: #333333;
 	color: #bbbbbb;
 	padding: 0px;
-	height: 500px;
+	height: 400px;
 }
 
 #left {
 	width: 25%;
 	float: left;
 	text-align: left;
-	height: 500px;
+	height: 400px;
 	background-color: #444444;
 }
 
@@ -56,14 +57,14 @@ body {
 }
 
 .scrollable {
-	height: 400px;
+	height: 300px;
 	overflow: auto;
 }
 
 #right {
 	width: 75%;
 	float: left;
-	height: 500px;
+	height: 400px;
 }
 
 #right form input:hover {
