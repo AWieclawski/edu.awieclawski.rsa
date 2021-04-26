@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<%
+	String ctx = request.getContextPath();
+%>
 
 <div id="left">
 
@@ -21,7 +25,7 @@
 
 	<div class="calculation">
 
-		<form action="${contextPath_A}/rsa-step-one" method="post">
+		<form action="<%=ctx%>/rsa-step-one" method="post">
 
 			<div class="submits">
 
