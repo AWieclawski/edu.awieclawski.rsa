@@ -88,6 +88,8 @@ public class Calculator {
 	public List<Integer> phiList(int n, int max) {
 		List<Integer> results = new ArrayList<>();
 		int count = 0;
+		if (max > 99)
+			surplus = getSurplus(max);
 		if (n == 1)
 			results.add(n);
 		else
@@ -103,7 +105,7 @@ public class Calculator {
 	}
 
 	/**
-	 * check if 'e' is coprime number. returns int > 0 if true.
+	 * check if 'e' is co-prime number. returns int > 0 if true.
 	 * 
 	 * @param n
 	 * @param e, public key part
@@ -126,7 +128,7 @@ public class Calculator {
 	 * 
 	 * @param e
 	 * @param n
-	 * @return ind, d
+	 * @return int, d
 	 */
 	public int privateKeyGenerator(int e, int n) {
 		int result = -1;
@@ -140,6 +142,18 @@ public class Calculator {
 				result = i;
 		}
 		System.out.println(".");
+		return result;
+	}
+
+	/**
+	 * Returns about 10 % of the number
+	 * 
+	 * @param number, int @return, int
+	 */
+	private int getSurplus(int number) {
+		int result = -1;
+		if (number > 0)
+			result = number / 10;
 		return result;
 	}
 

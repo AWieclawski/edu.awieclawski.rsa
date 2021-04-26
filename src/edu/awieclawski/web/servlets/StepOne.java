@@ -53,7 +53,8 @@ public class StepOne extends HttpServlet {
 		// log list of Attributes
 		HttpSession session = request.getSession(false);
 		Enumeration<String> attributeNames = session.getAttributeNames();
-		LOGGER.log(Level.INFO, "\n ** Attribute List ** ");
+		if (attributeNames.hasMoreElements())
+			LOGGER.log(Level.INFO, "\n ** Attribute List ** ");
 		while (attributeNames.hasMoreElements()) {
 			String tmpAttr = attributeNames.nextElement();
 			LOGGER.log(Level.INFO, " -- attribute=" + tmpAttr + ",value=" + session.getAttribute(tmpAttr));

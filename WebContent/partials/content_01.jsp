@@ -19,21 +19,7 @@
 
 		<div class="scrollable">
 
-			<b>
-			
-			<% if (p_A != null) { %>
-			
-				Primary number 'p' = <font color="<%=Attributes.P_NUM_A.getColor()%>"><%= p_A %></font>
-			
-			<% } %>
-			
-			<% if (q_A != null) { %>
-			
-				Primary number 'q' = <font color="<%=Attributes.Q_NUM_A.getColor()%>"><%= q_A %></font>
-			
-			<% } %>	
-			
-			</b>
+			<jsp:include page="/partials/results.jsp" />
 			
 		</div>
 
