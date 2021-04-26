@@ -42,7 +42,6 @@
 
 			<input type="number" id="qNumber_P" name="qNumber_P" min="1" max="1000">
 			
-
 		</form>
 
 	</div>

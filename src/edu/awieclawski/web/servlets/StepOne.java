@@ -28,7 +28,7 @@ import edu.awieclawski.web.utils.NumberUtil;
 public class StepOne extends HttpServlet {
 	private final static long serialVersionUID = 3371696875741740842L;
 	private final static Logger LOGGER = Logger.getLogger(StepOne.class.getName());
-	private String m_contextPath = null;
+	private String contextPath_A = null;
 
 	NumberUtil nUtil = new NumberUtil();
 
@@ -46,11 +46,11 @@ public class StepOne extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		m_contextPath = request.getContextPath();
+		contextPath_A = request.getContextPath();
 		HttpSession session = request.getSession(false);
-		session.setAttribute("contextPath_A", m_contextPath);
+		session.setAttribute("contextPath_A", contextPath_A);
 
-		LOGGER.log(Level.INFO, "contextPath=" + m_contextPath);
+		LOGGER.log(Level.INFO, "contextPath=" + contextPath_A);
 
 		errorCommunicate = (String) session.getAttribute("error_A");
 		infoCommunicate = (String) session.getAttribute("info_A");
@@ -85,8 +85,10 @@ public class StepOne extends HttpServlet {
 				MessageService thisMsgServ = entry.getValue();
 				int numberInt = thisMsgServ.getIntResult();
 				if (numberInt < 0) { // not integer
-					session.setAttribute("error_A", getActualMessageByString(thisMsgServ.getError()));
-					errorCommunicate = thisMsgServ.getError();
+					session.setAttribute("error_A", getActualErrorByString(thisMsgServ.getError()));
+					errorCommunicate = getActualErrorByString(thisMsgServ.getError());
+					session.setAttribute("info_A", getActualInfoByString(thisMsgServ.getInfo()));
+					errorCommunicate = getActualInfoByString(thisMsgServ.getInfo());
 					session.removeAttribute(entry.getKey());
 				} else {
 					thisMsgServ = nUtil.primeNumbersHandling(numberInt);
@@ -100,10 +102,12 @@ public class StepOne extends HttpServlet {
 
 					} else {
 						LOGGER.log(Level.INFO, "addedMsg=" + thisMsgServ.getError());
-						thisMsgServ = getActualMessageByMsgServ(thisMsgServ, entry);
+						thisMsgServ = getActualMsgServByMsgServ(thisMsgServ, entry);
 						pqMap.put(entry.getKey(), thisMsgServ);
-						session.setAttribute("error_A", getActualMessageByString(thisMsgServ.getError()));
-						errorCommunicate = thisMsgServ.getError();
+						session.setAttribute("error_A", getActualErrorByString(thisMsgServ.getError()));
+						errorCommunicate = getActualErrorByString(thisMsgServ.getError());
+						session.setAttribute("info_A", getActualInfoByString(thisMsgServ.getInfo()));
+						errorCommunicate = getActualInfoByString(thisMsgServ.getInfo());						
 						session.removeAttribute(entry.getKey());
 					}
 				}
@@ -124,42 +128,49 @@ public class StepOne extends HttpServlet {
 //		}
 
 		// pass-to logic
-		if (controlSum == count) {
+		if (controlSum == count) { // next step if all map lines are ok
 			session.setAttribute("pqNumbersMap", pqMap);
-			response.sendRedirect(m_contextPath + "/rsa-step-two");
+			response.sendRedirect(contextPath_A + "/rsa-step-two");
 		} else {
-			response.sendRedirect(m_contextPath + "/rsa-step-one");
+			response.sendRedirect(contextPath_A + "/rsa-step-one");
 		}
 	}
 
 	/**
-	 * Logic to avoid 'null' in message text string by MessageService
+	 * Logic to avoid 'null' in MessageService string by MessageService
 	 * 
 	 * @param msgServ, MessageService
 	 * @param entry,   Map.Entry<String, MessageService>
 	 * @return MessageService, actualized with error message
 	 */
-	private MessageService getActualMessageByMsgServ(MessageService msgServ, Map.Entry<String, MessageService> entry) {
+	private MessageService getActualMsgServByMsgServ(MessageService msgServ, Map.Entry<String, MessageService> entry) {
 		MessageService result = null;
 		String newErrorValue = "";
 		if (msgServ != null) {
+			
 			if (entry.getValue().getError() != null)
 				newErrorValue = entry.getValue().getError() + " | " + msgServ.getError();
 			else
 				newErrorValue = msgServ.getError();
 			msgServ.setError(newErrorValue);
+			
+			if (entry.getValue().getInfo() != null)
+				newErrorValue = entry.getValue().getInfo() + " | " + msgServ.getInfo();
+			else
+				newErrorValue = msgServ.getInfo();
+			
 			result = msgServ;
 		}
 		return result;
 	}
 
 	/**
-	 * Logic to avoid 'null' in message text string by String
+	 * Logic to avoid 'null' in error message text string by String
 	 * 
 	 * @param msgTxt
 	 * @return
 	 */
-	private String getActualMessageByString(String msgTxt) {
+	private String getActualErrorByString(String msgTxt) {
 		String newErrorValue = "";
 		if (msgTxt != null) {
 			if (errorCommunicate != null)
@@ -168,6 +179,23 @@ public class StepOne extends HttpServlet {
 				newErrorValue = msgTxt;
 		}
 		return newErrorValue;
+	}
+	
+	/**
+	 * Logic to avoid 'null' in info message text string by String
+	 * 
+	 * @param msgTxt
+	 * @return
+	 */
+	private String getActualInfoByString(String msgTxt) {
+		String newInfoValue = "";
+		if (msgTxt != null) {
+			if (infoCommunicate != null)
+				newInfoValue = infoCommunicate + " | " + msgTxt;
+			else
+				newInfoValue = msgTxt;
+		}
+		return newInfoValue;
 	}
 
 }
