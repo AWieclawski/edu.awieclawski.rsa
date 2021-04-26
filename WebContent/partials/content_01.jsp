@@ -15,12 +15,26 @@
 
 	<div class="description">
 
-		<h1>Calculation</h1>
+		<h1>Results</h1>
 
 		<div class="scrollable">
 
-			<p>This is calculation page</p>
-
+			<b>
+			
+			<% if (p_A != null) { %>
+			
+				Primary number 'p' = <font color="<%=Attributes.P_NUM_A.getColor()%>"><%= p_A %></font>
+			
+			<% } %>
+			
+			<% if (q_A != null) { %>
+			
+				Primary number 'q' = <font color="<%=Attributes.Q_NUM_A.getColor()%>"><%= q_A %></font>
+			
+			<% } %>	
+			
+			</b>
+			
 		</div>
 
 	</div>
@@ -35,32 +49,25 @@
 
 			<div class="submits">
 
-				<input type="submit" value="Confirm&NextStep"> <input
-					type="reset" value="Reset">
+				<input type="submit" value="Submit"> 
+				
+				<input type="reset" value="Reset">
 
 			</div>
 
 			<h3>Step 1. Compute N as the product of two prime numbers 'p' and 'q':</h3>
 			
-			<% if (p_A != null) { %>
+			<% if (p_A == null) { %>
 			
-			Primary number 'p' = <%= p_A %>
-			
-			<% } else { %>
-
 			<label for="<%=p_P%>">Primary number 'p' (between 1 and 1000):</label>
 
 			<input type="number" id="<%=p_P%>" name="<%=p_P%>" min="1" max="1000">
-			
-			<% } %>
 
 			<br> 
 			
-			<% if (q_A != null) { %>
+			<% } %>
 			
-			Primary number 'q' = <%= q_A %>
-			
-			<% } else { %>			
+			<% if (q_A == null) { %>	
 			
 			<label for="<%=q_P%>">Primary number 'q' (between 1 and 1000):</label> 
 

@@ -3,7 +3,7 @@ package edu.awieclawski.web.models;
 public enum Attributes {
 
 	CTX_PTH_A("contextPath_A", "white", null), ERROR_A("error_A", "orange", null), INFO_A("info_A", "cyan", null),
-	Q_NUM_A("qNumber_A", "white", "qNumber_P"), P_NUM_A("pNumber_A", "white", "pNumber_P");
+	Q_NUM_A("qNumber_A", "lime", "qNumber_P"), P_NUM_A("pNumber_A", "lime", "pNumber_P");
 
 	String color;
 	String name;

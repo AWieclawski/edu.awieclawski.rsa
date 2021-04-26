@@ -31,7 +31,7 @@ public class NumberUtil {
 				result.setIntResult(x);
 			} catch (NoPrimeNumberException e) {
 				result.setError(e.getMessage() + "=" + number);
-				result.setInfo(nearestPrimeNumbersPropositions(number));
+				result.setInfo(nearestPrimeNumbersProposition(number));
 				LOGGER.log(Level.SEVERE, e.getMessage() + "=" + number, e);
 			} catch (NegativeNumberException e) {
 				result.setError(e.getMessage() + "=" + number);
@@ -86,14 +86,16 @@ public class NumberUtil {
 	 * 
 	 * @param inputInt, int @return, List<Integer>
 	 */
-	private String nearestPrimeNumbersPropositions(int inputInt) {
+	private String nearestPrimeNumbersProposition(int inputInt) {
 		List<Integer> list = null;
 		String result = "";
 		if (inputInt > 0) {
 			list = new Calculator().nearestPrimeNumberList(inputInt);
 			if (list != null) {
 				result = "Nearest prime number propositions for " + inputInt + ":" + list.toString();
-				LOGGER.log(Level.INFO, result);
+
+//				LOGGER.log(Level.INFO, result);
+
 			}
 		} else
 			LOGGER.log(Level.SEVERE, "Probably no input number: " + inputInt);

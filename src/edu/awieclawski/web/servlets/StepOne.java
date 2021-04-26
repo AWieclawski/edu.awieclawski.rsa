@@ -93,6 +93,8 @@ public class StepOne extends HttpServlet {
 					m_errComm = getActualErrorByString(thisMsgServ.getError());
 					session.setAttribute(Attributes.INFO_A.getName(), getActualInfoByString(thisMsgServ.getInfo()));
 					m_infComm = getActualInfoByString(thisMsgServ.getInfo());
+					if (session.getAttribute(entry.getKey()) != null)
+						count++;
 				} else {
 					thisMsgServ = nUtil.getPrimeNumberAndMsgs(numberInt);
 					int numberValid = thisMsgServ.getIntResult();
