@@ -32,6 +32,8 @@ public class Calculator {
 	 */
 	public List<Integer> nearestPrimeNumberList(int number) {
 		List<Integer> results = new ArrayList<>();
+		if (number > 99)
+			surplus = getSurplus(number);
 		int count = 0;
 		if (number == 1)
 			results.add(2);
