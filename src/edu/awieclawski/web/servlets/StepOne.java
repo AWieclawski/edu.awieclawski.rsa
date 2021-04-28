@@ -74,8 +74,13 @@ public class StepOne extends HttpServlet {
 		int count = 0;
 		m_errComm = null;
 		m_infComm = null;
+		
+		// initial declaration of Attribute for /rsa-step-two servlet
+		session.setAttribute(Attributes.D_SUCC_A.getName(),Boolean.valueOf(false));
+		session.setAttribute(Attributes.FINISH_A.getName(),Boolean.valueOf(false));
+		session.setAttribute(Attributes.AUTO_A.getName(),Boolean.valueOf(false));
 
-		/// reset infoBar messages
+		// reset infoBar messages
 		session.removeAttribute(Attributes.ERROR_A.getName());
 		session.removeAttribute(Attributes.INFO_A.getName());
 

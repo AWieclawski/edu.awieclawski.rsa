@@ -109,7 +109,8 @@ public class NumberUtil {
 	}
 
 	/**
-	 * check if 'e' is co-prime number, 
+	 * check if 'e' is co-prime number,
+	 * 
 	 * @param n
 	 * @param e
 	 * @return
@@ -122,17 +123,50 @@ public class NumberUtil {
 		if (x > 0)
 			result.setIntResult(x);
 		else {
+			result.setError("Not coprime number!=" + e);
 			List<Integer> list = new ArrayList<>();
 			list = c.phiList(phiEuler(n), e);
 			if (list != null)
-				result.setInfo(list.toString());
+				result.setInfo("List of few closest coprime numbers:" + list.toString());
 		}
 		return result;
 	}
 
-	public int privateKeyGenerator(int n,int e) {
+	public int privateKeyGenerator(int n, int e) {
 		Calculator c = new Calculator();
 		return c.privateKeyGenerator(n, e);
+	}
+
+	/**
+	 * 
+	 * @param n
+	 * @param e
+	 * @return
+	 */
+	public int[] autoSearchRSAkey(int n, int e) {
+		Calculator calc = new Calculator();
+		int[] key = new int[3];
+		int d = -1;
+		int ip = -1;
+
+		while (ip < 0 || e > n) {
+			ip = calc.isCoPrime(n, e);
+			if (ip < 0)
+				e++;
+//			System.out.println("e=" + e);
+		}
+		while (d < 0 || e > n) {
+			d = calc.privateKeyGenerator(n, e);
+			if (d < 0)
+				e++;
+//			System.out.println("e=" + d + ",d=" + e);
+		}
+		if (d > 0) {
+			key[0] = n; // 'n' not changed but...
+			key[1] = e; // 'e' must be updated after all iterations
+			key[2] = d; // 'd' must be saved if found any
+		}
+		return key;
 	}
 
 }

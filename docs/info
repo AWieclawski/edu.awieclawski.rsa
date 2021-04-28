@@ -6,3 +6,4 @@ to the Project Java BuildPath libraries
 4. Deploy & visit at http://localhost:8080/edu.awieclawski.rsa/welcome
 Examples:
 1. p=11,q=23,e=29->d=129
+2. p=11,q=19,e=25-AUTO_SEARCH->p=11,q=19,e=29,d=149

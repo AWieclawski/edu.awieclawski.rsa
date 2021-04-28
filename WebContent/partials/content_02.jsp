@@ -13,6 +13,10 @@
 	Integer d_A = (Integer) session.getAttribute(Attributes.D_A.getName());
 	String e_P = Attributes.E_A.getParam();
 	String d_P = Attributes.D_A.getParam();	
+	Boolean dSucces_A = (Boolean) session.getAttribute(Attributes.D_SUCC_A.getName());
+	Boolean finish_A = (Boolean) session.getAttribute(Attributes.FINISH_A.getName());
+	String autoSearch_P = Attributes.AUTO_A.getParam();
+//	Boolean autoSearch_A = (Boolean) session.getAttribute(Attributes.AUTO_A.getName()); 
 %>
 
 <div id="left">
@@ -43,7 +47,7 @@
 
 		<form action="<%=ctx%>/rsa-step-two" method="post">
 		
-		<% if (d_A == null || e_A == null) { %>	
+		<% if (!dSucces_A) { %>	
 		
 			<div class="submits">
 
@@ -55,7 +59,7 @@
 			
 			<h3>Step 2. Compute RSA keys as the product of two co-prime numbers 'e' and 'd':</h3>
 
-			<% } %>				
+		<% } %>				
 			
 			<% if (e_A == null) { %>
 			
@@ -73,7 +77,15 @@
 			
 			Public Key <b><font color="<%=Attributes.E_A.getColor()%>">[<%= e_A %>,<%= n_A %>]</font></b>, Private Key <b><font color="<%=Attributes.D_A.getColor()%>">[<%= d_A %>,<%= n_A %>]</font></b>
 			
-			<% } %>			
+			<% } %>		
+			
+		<% if (!dSucces_A && finish_A) { %>	
+		
+			<label for="<%=autoSearch_P%>">Would you like to auto-calculate 'd'?</label>
+
+			<input type="checkbox" id="<%=autoSearch_P%>" name="<%=autoSearch_P%>" value="<%=autoSearch_P%>" >		
+		
+		<% } %>								
 			
 		</form>
 
