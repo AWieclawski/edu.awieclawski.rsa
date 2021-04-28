@@ -53,7 +53,7 @@ public class MainManager {
 			if (d < 0) {
 				System.out.println("Ops! privateKey can not be calculated for e=" + e);
 				if (cmdo.getAnyString(", or 'y' to auto-calculate").equals("y"))
-					d = autoSearchRSAkey(e + 1, n);
+					d = autoSearchRSAkey(n, e + 1);
 			}
 		}
 		privateKey[0] = d;

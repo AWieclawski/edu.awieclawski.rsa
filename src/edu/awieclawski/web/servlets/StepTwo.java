@@ -103,7 +103,7 @@ public class StepTwo extends HttpServlet {
 			if (numberValid > 0) { // OK - is co-Prime
 				session.setAttribute(Attributes.E_A.getName(), numberValid);
 				privateKey = nUtil.privateKeyGenerator(m_nMod, numberInt);
-				if (privateKey > 0) {
+				if (privateKey > 0) { // OK - d is found
 					session.setAttribute(Attributes.D_A.getName(), privateKey);
 				} else {
 					String infoTxt = "Ops! privateKey can not be calculated for 'e'=" + numberInt;
