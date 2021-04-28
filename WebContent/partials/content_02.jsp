@@ -43,6 +43,8 @@
 
 		<form action="<%=ctx%>/rsa-step-two" method="post">
 		
+		<% if (d_A == null || e_A == null) { %>	
+		
 			<div class="submits">
 
 				<input type="submit" value="Submit"> 
@@ -50,8 +52,10 @@
 				<input type="reset" value="Reset">
 
 			</div>
-
+			
 			<h3>Step 2. Compute RSA keys as the product of two co-prime numbers 'e' and 'd':</h3>
+
+			<% } %>				
 			
 			<% if (e_A == null) { %>
 			
@@ -65,7 +69,9 @@
 			
 			<% if (d_A != null && e_A != null) { %>	
 			
-			Public Key <b><font color="<%=Attributes.E_A.getColor()%>">[<%= e_A %>,<%= n_A %>]</font></b> & Private Key <b><font color="<%=Attributes.D_A.getColor()%>">[<%= d_A %>,<%= n_A %>]</font></b>
+			<h3>Solution:</h3>
+			
+			Public Key <b><font color="<%=Attributes.E_A.getColor()%>">[<%= e_A %>,<%= n_A %>]</font></b>, Private Key <b><font color="<%=Attributes.D_A.getColor()%>">[<%= d_A %>,<%= n_A %>]</font></b>
 			
 			<% } %>			
 			

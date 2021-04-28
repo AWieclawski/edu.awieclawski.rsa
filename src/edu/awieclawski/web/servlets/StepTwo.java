@@ -106,7 +106,7 @@ public class StepTwo extends HttpServlet {
 				if (privateKey > 0) {
 					session.setAttribute(Attributes.D_A.getName(), privateKey);
 				} else {
-					String infoTxt = "Ops! privateKey can not be calculated for e=" + numberInt;
+					String infoTxt = "Ops! privateKey can not be calculated for 'e'=" + numberInt;
 					LOGGER.log(Level.WARNING, " >>>>> infoTxt=" + infoTxt);
 					session.setAttribute(Attributes.INFO_A.getName(), getActualInfoByString(infoTxt));
 					m_infComm = getActualInfoByString(thisMsgServ.getInfo());

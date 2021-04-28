@@ -130,9 +130,9 @@ public class NumberUtil {
 		return result;
 	}
 
-	public int privateKeyGenerator(int e, int n) {
+	public int privateKeyGenerator(int n,int e) {
 		Calculator c = new Calculator();
-		return c.privateKeyGenerator(e, n);
+		return c.privateKeyGenerator(n, e);
 	}
 
 }

@@ -20,8 +20,6 @@
 %>    
 
 	<div class="results">
-
-<b>
 			
 	<% if (p_A != null) { %>
 			
@@ -70,7 +68,5 @@
 		<br>
 			
 	<% } %>	
-			
-</b>
 
 </div>
