@@ -37,6 +37,7 @@ public class StepTwo extends HttpServlet {
 	private String m_errComm = null;
 	private String m_infComm = null;
 	private int m_nMod = -1;
+	private int m_PhiN = -1;
 	private int privateKey = -1;
 	private int publicKey = -1;
 
@@ -70,8 +71,9 @@ public class StepTwo extends HttpServlet {
 
 		if (p_A > 0 && q_A > 0) {
 			m_nMod = p_A * q_A;
+			m_PhiN = nUtil.phiEuler(m_nMod);
 			session.setAttribute(Attributes.N_A.getName(), m_nMod);
-			session.setAttribute(Attributes.PHI_A.getName(), nUtil.phiEuler(m_nMod));
+			session.setAttribute(Attributes.PHI_A.getName(), m_PhiN);
 		}
 
 		response.setContentType("text/html");
@@ -100,7 +102,7 @@ public class StepTwo extends HttpServlet {
 			m_infComm = getActualInfoByString(thisMsgServ.getInfo());
 
 		} else {
-			thisMsgServ = nUtil.getCoPrimeAndMsg(m_nMod, numberInt);
+			thisMsgServ = nUtil.getCoPrimeAndMsg(m_nMod, numberInt, m_PhiN);
 
 			publicKey = thisMsgServ.getIntResult();
 			if (publicKey > 0) { // OK - is co-Prime

@@ -39,11 +39,11 @@
 
 	<div class="calculation">
 	
-		<p>The values of 'p' and 'q' you provided yield a modulus 'n', and also a Euler function for n - Phi(n).
-		Using the Euclidean algorithm appropriately, 
-		find the number e which is relatively prime to the computed value of the Euler function Ø (ie GCD (e, Ø) = 1). 
-		This number should also satisfy the inequality 1 &#62; e &#62; n. 
-		It does not have to be prime but odd. </p>
+		<p>The values of 'p' and 'q' you provided yield a modulus 'n', and also a Euler function for n - Ø(n).</p>
+		<p>Using the Euclidean algorithm appropriately, you should find the number 'e' (Public Key), 
+		which is relatively prime to the computed value of the Euler function Ø (i.e. GCD (e, Ø) = 1). GCD - greatest common divisor.</p>
+		<p>This number should also satisfy the inequality 1 &#62; e &#62; n. 
+		<strong>It does not have to be prime but odd only.</strong> </p>
 
 		<form action="<%=ctx%>/rsa-step-two" method="post">
 		
@@ -63,9 +63,9 @@
 			
 			<% if (e_A == null) { %>
 			
-			<label for="<%=e_P%>">Co-prime candidate 'e' (between 1 and 1000):</label>
+			<label for="<%=e_P%>">Co-prime candidate 'e' (between 1 and <%=n_A-1%>):</label>
 
-			<input type="number" id="<%=e_P%>" name="<%=e_P%>" min="1" max="1000">
+			<input type="number" id="<%=e_P%>" name="<%=e_P%>" min="1" max="<%=n_A-1%>">
 
 			<br> 
 			

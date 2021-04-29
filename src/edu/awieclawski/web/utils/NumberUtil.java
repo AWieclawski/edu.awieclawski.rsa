@@ -8,9 +8,10 @@ import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 
+import edu.awieclawski.cmd.utils.Calculator;
 import edu.awieclawski.exceptions.NegativeNumberException;
+import edu.awieclawski.exceptions.NoCoPrimesException;
 import edu.awieclawski.exceptions.NoPrimeNumberException;
-import edu.awieclawski.utils.Calculator;
 import edu.awieclawski.web.service.MessageService;
 
 /**
@@ -21,6 +22,7 @@ import edu.awieclawski.web.service.MessageService;
  */
 public class NumberUtil {
 	private final static Logger LOGGER = Logger.getLogger(NumberUtil.class.getName());
+	private Calculator calc = new Calculator();
 
 	public MessageService getPrimeNumberAndMsgs(Integer number) throws ServletException, IOException {
 		Integer x = -1;
@@ -46,10 +48,9 @@ public class NumberUtil {
 	}
 
 	private Integer isPrimeNumberCheck(Integer number) throws NoPrimeNumberException, NegativeNumberException {
-		Calculator c = new Calculator();
 		Integer x = -1;
 
-		if (!c.isPrimeNumber(number))
+		if (!calc.isPrimeNumber(number))
 			throw new NoPrimeNumberException();
 
 		if (number < 0)
@@ -76,9 +77,12 @@ public class NumberUtil {
 		return result;
 	}
 
-	private boolean isNumeric(String str) {
+	private boolean isNumeric(String str) throws NumberFormatException {
 		if (str != null)
-			return str != null && str.matches("[0-9.]+");
+			if (str.matches("[0-9.]+"))
+				return true;
+			else
+				throw new NumberFormatException();
 		return false;
 	}
 
@@ -104,8 +108,7 @@ public class NumberUtil {
 	}
 
 	public int phiEuler(int n) {
-		Calculator c = new Calculator();
-		return c.phiEuler(n);
+		return calc.phiEuler(n);
 	}
 
 	/**
@@ -115,26 +118,48 @@ public class NumberUtil {
 	 * @param e
 	 * @return
 	 */
-	public MessageService getCoPrimeAndMsg(int n, int e) {
+	public MessageService getCoPrimeAndMsg(int n, int e, int phi) {
 		MessageService result = new MessageService(-1, null, null);
-		int x = -1;
-		Calculator c = new Calculator();
-		x = c.isCoPrime(n, e);
-		if (x > 0)
-			result.setIntResult(x);
+		if (e >= n)
+			result.setError("'e' must be lower number than 'n'=" + n);
 		else {
-			result.setError("Not coprime number!=" + e);
-			List<Integer> list = new ArrayList<>();
-			list = c.phiList(phiEuler(n), e);
-			if (list != null)
-				result.setInfo("List of few closest coprime numbers:" + list.toString());
+			int x = -1;
+			try {
+				x = isCoPrimeCheck(phi, e);
+				result.setIntResult(x);
+			} catch (NoCoPrimesException ex) {
+				String errMsg = ex.getMessage() + ":[" + n + "," + e + "]";
+				result.setError(errMsg);
+				LOGGER.log(Level.WARNING, errMsg);
+				List<Integer> list = new ArrayList<>();
+				list = calc.phiList(phi, e);
+				if (list != null)
+					result.setInfo("List of few closest coprime numbers for n=" + n + ":" + list.toString());
+			}
 		}
 		return result;
 	}
 
+	/**
+	 * Modification of edu.awieclawski.cmd.utils.Calculator.isCoPrime method with
+	 * new NoCoPrimesException
+	 * 
+	 * @param n
+	 * @param e
+	 * @return int
+	 * @throws NoCoPrimesException
+	 */
+	private int isCoPrimeCheck(int n, int e) throws NoCoPrimesException {
+		int x = -1;
+		x = calc.isCoPrime(n, e);
+		if (x > 0)
+			return x;
+		else
+			throw new NoCoPrimesException();
+	}
+
 	public int privateKeyGenerator(int n, int e) {
-		Calculator c = new Calculator();
-		return c.privateKeyGenerator(n, e);
+		return calc.privateKeyGenerator(n, e);
 	}
 
 	/**
@@ -144,7 +169,6 @@ public class NumberUtil {
 	 * @return
 	 */
 	public int[] autoSearchRSAkey(int n, int e) {
-		Calculator calc = new Calculator();
 		int[] key = new int[3];
 		int d = -1;
 		int ip = -1;

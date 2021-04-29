@@ -1,13 +1,13 @@
-package edu.awieclawski.services;
+package edu.awieclawski.cmd.services;
 
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+import edu.awieclawski.cmd.utils.Calculator;
 import edu.awieclawski.exceptions.NegativeNumberException;
 import edu.awieclawski.exceptions.NoPrimeNumberException;
 import edu.awieclawski.exceptions.NumberOutOfListException;
-import edu.awieclawski.utils.Calculator;
 
 public class CmdController {
 

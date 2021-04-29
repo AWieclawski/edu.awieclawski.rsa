@@ -1,4 +1,4 @@
-package edu.awieclawski.utils;
+package edu.awieclawski.cmd.utils;
 
 import java.util.ArrayList;
 import java.util.List;

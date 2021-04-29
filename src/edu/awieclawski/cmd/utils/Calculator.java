@@ -1,4 +1,4 @@
-package edu.awieclawski.utils;
+package edu.awieclawski.cmd.utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,6 +64,23 @@ public class Calculator {
 	}
 
 	/**
+	 * http://www.algorytm.org/algorytmy-arytmetyczne/algorytm-euklidesa/euklides-j.html
+	 * 
+	 * @param a
+	 * @param b
+	 * @return
+	 */
+	private int nwd(int a, int b) {
+		while (a != b) {
+			if (a > b)
+				a -= b;
+			else
+				b -= a;
+		}
+		return a;
+	}
+
+	/**
 	 * Euler's phi function specifies the number of coprime numbers for 'n'.
 	 * 
 	 * @param n
@@ -74,7 +91,8 @@ public class Calculator {
 			return 1;
 		int count = 0;
 		for (int i = 1; i < n; i++) {
-			if (gcd(i, n) == 1)
+//			if (gcd(i, n) == 1)
+				if (nwd(i, n) == 1)
 				count++;
 		}
 		return count;
@@ -132,7 +150,7 @@ public class Calculator {
 	 * @param n
 	 * @return int, d
 	 */
-	public int privateKeyGenerator(int n,int e) {
+	public int privateKeyGenerator(int n, int e) {
 		int result = -1;
 		for (int i = 2; i < phiEuler(n); i++) {
 			// progress points

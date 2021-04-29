@@ -5,11 +5,11 @@ import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.List;
 
+import edu.awieclawski.cmd.services.CmdController;
+import edu.awieclawski.cmd.utils.Calculator;
+import edu.awieclawski.cmd.utils.DeEncoder;
 import edu.awieclawski.exceptions.NegativeNumberException;
 import edu.awieclawski.exceptions.NoPrimeNumberException;
-import edu.awieclawski.services.CmdController;
-import edu.awieclawski.utils.Calculator;
-import edu.awieclawski.utils.DeEncoder;
 
 public class MainManager {
 
