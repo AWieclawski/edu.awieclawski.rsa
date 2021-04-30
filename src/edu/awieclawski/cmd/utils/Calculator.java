@@ -5,9 +5,6 @@ import java.util.List;
 
 public class Calculator {
 
-	private int surplus = 9;
-	private int fewNumbers = 5;
-
 	/**
 	 * determines if a given number 'n' is a prime or not.
 	 * 
@@ -32,21 +29,76 @@ public class Calculator {
 	 */
 	public List<Integer> nearestPrimeNumberList(int number) {
 		List<Integer> results = new ArrayList<>();
-		if (number > 99)
-			surplus = getSurplus(number);
-		int count = 0;
+		int tmpPrim = -1;
 		if (number == 1)
 			results.add(2);
-		else
-			for (int i = number + surplus; i > 0; i--) {
-				if (isPrimeNumber(i)) {
-					results.add(i);
-					count++;
-				}
-				if (count > fewNumbers)
-					return results;
+		else {
+			tmpPrim = previousPrime(number);
+			if (previousPrime(number) > 0) {
+				results.add(tmpPrim);
+				tmpPrim--;
 			}
+			tmpPrim = nextPrime(number);
+			if (tmpPrim > 0) {
+				results.add(tmpPrim);
+				tmpPrim++;
+			}
+		}
 		return results;
+	}
+
+	/**
+	 * https://www.geeksforgeeks.org/program-to-find-the-next-prime-number/
+	 * 
+	 * @param N
+	 * @return
+	 */
+	private int nextPrime(int N) {
+
+		// Base case
+		if (N <= 1)
+			return 2;
+
+		int prime = N;
+		boolean found = false;
+
+		// Loop continuously until isPrime returns
+		// true for a number greater than n
+		while (!found) {
+			prime++;
+
+			if (isPrimeNumber(prime))
+				found = true;
+		}
+
+		return prime;
+	}
+
+	/**
+	 * https://www.geeksforgeeks.org/program-to-find-the-next-prime-number/
+	 * 
+	 * @param N
+	 * @return
+	 */
+	private int previousPrime(int N) {
+
+		// Base case
+		if (N <= 1)
+			return 2;
+
+		int prime = N;
+		boolean found = false;
+
+		// Loop continuously until isPrime returns
+		// true for a number lower than n
+		while (!found) {
+			prime--;
+
+			if (isPrimeNumber(prime))
+				found = true;
+		}
+
+		return prime;
 	}
 
 	/**
@@ -92,7 +144,7 @@ public class Calculator {
 		int count = 0;
 		for (int i = 1; i < n; i++) {
 //			if (gcd(i, n) == 1)
-				if (nwd(i, n) == 1)
+			if (nwd(i, n) == 1)
 				count++;
 		}
 		return count;
@@ -102,25 +154,33 @@ public class Calculator {
 	 * Presents list of few coprime numbers closest to 'max'
 	 * 
 	 * @param n
-	 * @param max
+	 * @param number
 	 * @return List<Integer>
 	 */
-	public List<Integer> phiList(int n, int max) {
+	public List<Integer> phiList(int n, int number) {
 		List<Integer> results = new ArrayList<>();
-		int count = 0;
-		if (max > 99)
-			surplus = getSurplus(max);
+		boolean found = false;
+		int coPrime = number;
 		if (n == 1)
 			results.add(n);
-		else
-			for (int i = max + surplus; i > 0; i--) {
-				if (gcd(i, n) == 1) {
-					results.add(i);
-					count++;
+		else {
+			while (!found) {
+				coPrime--;
+				if (gcd(coPrime, n) == 1) {
+					results.add(coPrime);
+					found = true;
 				}
-				if (count > fewNumbers)
-					return results;
 			}
+			found = false;
+			coPrime = number;
+			while (!found) {
+				coPrime++;
+				if (gcd(coPrime, n) == 1) {
+					results.add(coPrime);
+					found = true;
+				}
+			}
+		}
 		return results;
 	}
 

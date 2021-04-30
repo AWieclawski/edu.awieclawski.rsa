@@ -55,7 +55,6 @@ public class StepThree extends HttpServlet {
 //		m_ctxPth = request.getContextPath();
 
 		HttpSession session = request.getSession(false);
-//		session.setAttribute(Attributes.D_SUCC_A.getName(), Boolean.valueOf(false));
 		session.setAttribute(Attributes.FINISH_A.getName(), Boolean.valueOf(false));
 
 		// log list of Attributes

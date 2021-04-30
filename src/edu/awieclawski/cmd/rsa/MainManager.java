@@ -1,4 +1,4 @@
-package edu.awieclawski.rsa;
+package edu.awieclawski.cmd.rsa;
 
 import java.util.ArrayList;
 import java.util.Arrays;
