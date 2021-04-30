@@ -55,9 +55,12 @@ public class StepTwo extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		m_ctxPth = request.getContextPath();
+		
+		// pre-Declare attributes for "/rsa-step-three"
+		HttpSession session = request.getSession(false);
+		session.setAttribute(Attributes.RSA_SUCC_A.getName(), Boolean.valueOf(false));
 
 		// log list of Attributes
-		HttpSession session = request.getSession(false);
 		Enumeration<String> attributeNames = session.getAttributeNames();
 		if (attributeNames.hasMoreElements())
 			LOGGER.log(Level.INFO, "\n ** Attribute List ** ");
@@ -156,7 +159,7 @@ public class StepTwo extends HttpServlet {
 		}
 
 		// pass-to logic
-		if (privateKey > 0) { // next step if all map lines are ok
+		if (privateKey > 0 && request.getParameter(Attributes.TESTKEYS_A.getParam()) != null) {
 			response.sendRedirect(m_ctxPth + "/rsa-step-three");
 		} else {
 			response.sendRedirect(m_ctxPth + "/rsa-step-two");

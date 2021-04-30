@@ -16,7 +16,7 @@
 	Boolean dSucces_A = (Boolean) session.getAttribute(Attributes.D_SUCC_A.getName());
 	Boolean finish_A = (Boolean) session.getAttribute(Attributes.FINISH_A.getName());
 	String autoSearch_P = Attributes.AUTO_A.getParam();
-//	Boolean autoSearch_A = (Boolean) session.getAttribute(Attributes.AUTO_A.getName()); 
+	String testKeys_P = Attributes.TESTKEYS_A.getParam();
 %>
 
 <div id="left">
@@ -76,6 +76,12 @@
 			<h3>Solution:</h3>
 			
 			Public Key <b><font color="<%=Attributes.E_A.getColor()%>">[<%= e_A %>,<%= n_A %>]</font></b>, Private Key <b><font color="<%=Attributes.D_A.getColor()%>">[<%= d_A %>,<%= n_A %>]</font></b>
+						
+			<div class="submits">
+
+				<input type="submit" value="Test the keys" name="<%=testKeys_P%>" />
+				
+			</div>	
 			
 			<% } %>		
 			
