@@ -10,8 +10,8 @@ public enum Attributes {
 	TESTKEYS_A("keysTestStart_A", "lime", "keysTestStart_P"), AUTO_A("autoSearch_A", "lime", "autoSearch_P"),
 	ASCII_EN_A("asciiEn_A", "lime", "asciiEn_P"), ASCII_DE_A("asciiDe_A", "cyan", "asciiDe_P"),
 	RSA_EN_A("rsaEn_A", "lime", "rsaEn_P"), TEXT_EN_A("textEn_A", "lime", "textEn_P"),
-	TEXT_DE_A("textDe_A", "cyan", "textDe_P"), PUBLIC_KEY_A("publicKey_A", "lime", "publicKey_P"),
-	PRIVATE_KEY_A("privateKey_A", "lime", "privateKey_P"), RSA_SUCC_A("rsaSucces_A", "cyan", "rsaSucces_P");
+	TEXT_DE_A("textDe_A", "cyan", "textDe_P"), PUBLIC_KEY_A("publicKey_A", "magenta", "publicKey_P"),
+	PRIVATE_KEY_A("privateKey_A", "magenta", "privateKey_P"), RSA_SUCC_A("rsaSucces_A", "cyan", "rsaSucces_P");
 
 	String color;
 	String name;

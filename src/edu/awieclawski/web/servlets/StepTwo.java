@@ -55,18 +55,24 @@ public class StepTwo extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		m_ctxPth = request.getContextPath();
-		
+
 		// pre-Declare attributes for "/rsa-step-three"
 		HttpSession session = request.getSession(false);
-		session.setAttribute(Attributes.RSA_SUCC_A.getName(), Boolean.valueOf(false));
+		if (session != null)
+			session.setAttribute(Attributes.RSA_SUCC_A.getName(), Boolean.valueOf(false));
+		else
+			request.getRequestDispatcher("/welcome.jsp").forward(request, response);
 
 		// log list of Attributes
-		Enumeration<String> attributeNames = session.getAttributeNames();
-		if (attributeNames.hasMoreElements())
-			LOGGER.log(Level.INFO, "\n ** Attribute List ** ");
-		while (attributeNames.hasMoreElements()) {
-			String tmpAttr = attributeNames.nextElement();
-			LOGGER.log(Level.INFO, " -- attribute=" + tmpAttr + ",value=" + session.getAttribute(tmpAttr));
+		Enumeration<String> attributeNames;
+		if (session != null) {
+			attributeNames = session.getAttributeNames();
+			if (attributeNames.hasMoreElements())
+				LOGGER.log(Level.INFO, "\n ** Attribute List ** ");
+			while (attributeNames.hasMoreElements()) {
+				String tmpAttr = attributeNames.nextElement();
+				LOGGER.log(Level.INFO, " -- attribute=" + tmpAttr + ",value=" + session.getAttribute(tmpAttr));
+			}
 		}
 
 		Integer p_A = (Integer) session.getAttribute(Attributes.P_NUM_A.getName());

@@ -50,14 +50,20 @@ public class StepOne extends HttpServlet {
 			throws ServletException, IOException {
 		m_ctxPth = request.getContextPath();
 
-		// log list of Attributes
 		HttpSession session = request.getSession(false);
-		Enumeration<String> attributeNames = session.getAttributeNames();
-		if (attributeNames.hasMoreElements())
-			LOGGER.log(Level.INFO, "\n ** Attribute List ** ");
-		while (attributeNames.hasMoreElements()) {
-			String tmpAttr = attributeNames.nextElement();
-			LOGGER.log(Level.INFO, " -- attribute=" + tmpAttr + ",value=" + session.getAttribute(tmpAttr));
+		if (session == null)
+			request.getRequestDispatcher("/welcome.jsp").forward(request, response);
+
+		// log list of Attributes
+		Enumeration<String> attributeNames;
+		if (session != null) {
+			attributeNames = session.getAttributeNames();
+			if (attributeNames.hasMoreElements())
+				LOGGER.log(Level.INFO, "\n ** Attribute List ** ");
+			while (attributeNames.hasMoreElements()) {
+				String tmpAttr = attributeNames.nextElement();
+				LOGGER.log(Level.INFO, " -- attribute=" + tmpAttr + ",value=" + session.getAttribute(tmpAttr));
+			}
 		}
 
 		response.setContentType("text/html");
@@ -74,11 +80,11 @@ public class StepOne extends HttpServlet {
 		int count = 0;
 		m_errComm = null;
 		m_infComm = null;
-		
+
 		// initial declaration of Attribute for /rsa-step-two servlet
-		session.setAttribute(Attributes.D_SUCC_A.getName(),Boolean.valueOf(false));
-		session.setAttribute(Attributes.FINISH_A.getName(),Boolean.valueOf(false));
-		session.setAttribute(Attributes.AUTO_A.getName(),Boolean.valueOf(false));
+		session.setAttribute(Attributes.D_SUCC_A.getName(), Boolean.valueOf(false));
+		session.setAttribute(Attributes.FINISH_A.getName(), Boolean.valueOf(false));
+		session.setAttribute(Attributes.AUTO_A.getName(), Boolean.valueOf(false));
 
 		// reset infoBar messages
 		session.removeAttribute(Attributes.ERROR_A.getName());

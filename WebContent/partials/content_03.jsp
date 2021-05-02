@@ -78,7 +78,7 @@
 			Source to ASCII: <font color="<%=Attributes.ASCII_EN_A.getColor()%>"><%= asciiEn_A %></font> <br>
 			Encoded from ASCII: <font color="<%=Attributes.RSA_EN_A.getColor()%>"><%= rsaEn_A %></font> <br> with private key 
 			<font color="<%=Attributes.PRIVATE_KEY_A.getColor()%>"><%=privateKey_A%></font> <br>
-			-- (Transmission channel) -- <br>
+			<p> -- (Transmission channel) -- </p>
 			Decoded to ASCII: <font color="<%=Attributes.ASCII_DE_A.getColor()%>"><%= asciiDe_A %></font> <br> with public key  
 			<font color="<%=Attributes.PUBLIC_KEY_A.getColor()%>"><%=publicKey_A%></font> <br>
 			Received from decoded ASCII: <font color="<%=Attributes.TEXT_DE_A.getColor()%>"><%= textDe_A %></font> 

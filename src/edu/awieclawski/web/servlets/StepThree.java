@@ -28,7 +28,7 @@ public class StepThree extends HttpServlet {
 	private static final long serialVersionUID = -7493929285084375983L;
 	private final static Logger LOGGER = Logger.getLogger(StepOne.class.getName());
 
-//	private String m_ctxPth = null;
+	private String m_ctxPth = null;
 //	private String m_errComm = null;
 //	private String m_infComm = null;
 	private int m_nMod = -1;
@@ -52,18 +52,24 @@ public class StepThree extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-//		m_ctxPth = request.getContextPath();
+		m_ctxPth = request.getContextPath();
 
 		HttpSession session = request.getSession(false);
-		session.setAttribute(Attributes.FINISH_A.getName(), Boolean.valueOf(false));
+		if (session != null)
+			session.setAttribute(Attributes.FINISH_A.getName(), Boolean.valueOf(false));
+		else
+			request.getRequestDispatcher("/welcome.jsp").forward(request, response);
 
 		// log list of Attributes
-		Enumeration<String> attributeNames = session.getAttributeNames();
-		if (attributeNames.hasMoreElements())
-			LOGGER.log(Level.INFO, "\n ** Attribute List ** ");
-		while (attributeNames.hasMoreElements()) {
-			String tmpAttr = attributeNames.nextElement();
-			LOGGER.log(Level.INFO, " -- attribute=" + tmpAttr + ",value=" + session.getAttribute(tmpAttr));
+		Enumeration<String> attributeNames;
+		if (session != null) {
+			attributeNames = session.getAttributeNames();
+			if (attributeNames.hasMoreElements())
+				LOGGER.log(Level.INFO, "\n ** Attribute List ** ");
+			while (attributeNames.hasMoreElements()) {
+				String tmpAttr = attributeNames.nextElement();
+				LOGGER.log(Level.INFO, " -- attribute=" + tmpAttr + ",value=" + session.getAttribute(tmpAttr));
+			}
 		}
 
 		response.setContentType("text/html");
