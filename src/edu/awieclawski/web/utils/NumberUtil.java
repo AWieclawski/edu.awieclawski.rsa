@@ -26,7 +26,7 @@ public class NumberUtil {
 
 	public MessageService getPrimeNumberAndMsgs(Integer number) throws ServletException, IOException {
 		Integer x = -1;
-		MessageService result = new MessageService(x, null, null);
+		MessageService result = MessageService.getNewMessageService();
 
 		if (number != null) {
 			try {
@@ -42,7 +42,7 @@ public class NumberUtil {
 			}
 		}
 
-//		LOGGER.log(Level.INFO, "primeNumbersHandlingReturn=" + x);
+//		LOGGER.log(Level.INFO, "primeNumbersHandlingReturn=" + x + "|" + result.toString());
 
 		return result;
 	}
@@ -64,7 +64,7 @@ public class NumberUtil {
 	}
 
 	public MessageService getIntFromStringAndMsg(String txt) {
-		MessageService result = new MessageService(-1, null, null);
+		MessageService result = MessageService.getNewMessageService();
 
 		if (isNumeric(txt))
 			try {
@@ -119,7 +119,7 @@ public class NumberUtil {
 	 * @return
 	 */
 	public MessageService getCoPrimeAndMsg(int n, int e, int phi) {
-		MessageService result = new MessageService(-1, null, null);
+		MessageService result = MessageService.getNewMessageService();
 		if (e >= n)
 			result.setError("'e' must be lower number than 'n'=" + n);
 		else {

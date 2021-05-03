@@ -28,7 +28,7 @@ public class StepThree extends HttpServlet {
 	private static final long serialVersionUID = -7493929285084375983L;
 	private final static Logger LOGGER = Logger.getLogger(StepOne.class.getName());
 
-	private String m_ctxPth = null;
+//	private String m_ctxPth = null;
 //	private String m_errComm = null;
 //	private String m_infComm = null;
 	private int m_nMod = -1;
@@ -52,7 +52,7 @@ public class StepThree extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		m_ctxPth = request.getContextPath();
+//		m_ctxPth = request.getContextPath();
 
 		HttpSession session = request.getSession(false);
 		if (session != null)

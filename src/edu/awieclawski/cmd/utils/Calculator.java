@@ -225,16 +225,4 @@ public class Calculator {
 		return result;
 	}
 
-	/**
-	 * Returns about 10 % of the number
-	 * 
-	 * @param number, int @return, int
-	 */
-	private int getSurplus(int number) {
-		int result = -1;
-		if (number > 0)
-			result = number / 10;
-		return result;
-	}
-
 }

@@ -68,6 +68,10 @@ public class MessageService implements Serializable {
 	public void setInfo(String info) {
 		this.info = info;
 	}
+	
+	public static MessageService getNewMessageService() {
+		return new MessageService(-1, null, null);
+	}
 
 	@Override
 	public String toString() {
