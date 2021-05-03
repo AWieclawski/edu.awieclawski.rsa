@@ -5,7 +5,7 @@ RSA key generator, use greatest common divisor, Euler's phi, coprime numbers
 3. API Rest in edu.awieclawski.web.rest
 
 
-==
+
 Web-App
 ==
 Instruction:
@@ -19,30 +19,29 @@ Examples:
 3. p=113,q=241,e=827->d=5363
 
 
-==
+
 Rest API 
 ==
-Download from:
+1. Download from:
 https://eclipse-ee4j.github.io/jersey/download.html
-the archive 'jaxrs-ri-2.25.1.zip' described as 
-"Jersey JAX-RS 2.0 RI bundle bundle contains the JAX-RS 2.0 API jar, 
-all the core Jersey module jars as well as all the required 3rd-party dependencies."
----
-Extract the archive and add (by right click on the Project): 
+the archive 'jaxrs-ri-2.25.1.zip' described as Jersey JAX-RS 2.0 RI bundle bundle contains the JAX-RS 2.0 API jar, all the core Jersey module jars as well as all the required 3rd-party dependencies.
+2. Extract the archive and add (by right click on the Project): 
  - all the jars to the 'BuildPath' of the Project 
  - all the jars to the 'Properties' > 'Deployment Assembly'
  --
-Deploy, by 'Run on Server' in Eclipse.
--- Hello --
+3. Deploy, by 'Run on Server' in Eclipse.
+- Hello 
  Visit at: http://localhost:8080/edu.awieclawski.rsa/rest/api
--- get client Agent --
+- get client Agent 
  http://localhost:8080/edu.awieclawski.rsa/rest/api/agent
--- is prime? --
+- is prime? 
+ a/
  http://localhost:8080/edu.awieclawski.rsa/rest/api/isprime/29
   -> returns '29'
+ b/  
  http://localhost:8080/edu.awieclawski.rsa/rest/api/isprime/22
   -> returns 'HTTP Status 417 - Expectation Failed'
+ c/  
  http://localhost:8080/edu.awieclawski.rsa/rest/api/isprime/aa
   -> returns 'HTTP Status 406 - Not Acceptable'
---
  
