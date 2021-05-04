@@ -26,9 +26,9 @@ to the Project Java BuildPath libraries
 ==== requirements: ====
 1. Download from: https://eclipse-ee4j.github.io/jersey/download.html
 the archive 'jaxrs-ri-2.25.1.zip' described as 'Jersey JAX-RS 2.0 RI bundle bundle contains the JAX-RS 2.0 API jar, all the core Jersey module jars as well as all the required 3rd-party dependencies.'
-2. Extract the archive and add (by right click on the Project): 
- - all the jars to the 'BuildPath' > 'Libraries' tab of the Project 
- - all the jars to the 'Properties' > 'Deployment Assembly'
+2. Extract the archive and add all the jars  (by right click on the Project): 
+ - to the 'BuildPath' > 'Libraries' tab  
+ - to the 'Properties' > 'Deployment Assembly'
 3. Deploy, by 'Run on Server' in Eclipse.
 
 ==== examples: ====
