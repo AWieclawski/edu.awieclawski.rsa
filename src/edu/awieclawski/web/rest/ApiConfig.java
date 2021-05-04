@@ -5,7 +5,7 @@ import org.glassfish.jersey.server.ResourceConfig;
 public class ApiConfig extends ResourceConfig {
 	public ApiConfig() {
 		// Resources / Custom providers
-		packages("edu.awieclawski.web.rest");
+		packages("edu.awieclawski.web.rest","com.fasterxml.jackson.jaxrs.json");
 		
 	}
 

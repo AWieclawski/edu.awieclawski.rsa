@@ -1,5 +1,7 @@
 package edu.awieclawski.web.rest;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -9,6 +11,7 @@ import edu.awieclawski.cmd.utils.Calculator;
 import edu.awieclawski.web.service.MessageService;
 import edu.awieclawski.web.utils.NumberUtil;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.Path;
@@ -77,11 +80,13 @@ public class ApiServices {
 	
 	@GET
 	@Path("/isprime_rj/{number}") // return JSON
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response isPrimeJ(@PathParam("number") String number  ) {
 		Calculator calc = new Calculator();
 		NumberUtil nUtil = new NumberUtil();
 		MessageService thisMsgServ = MessageService.getNewMessageService();
+//		Prime prime = new Prime();
 		int numberInt = -1;
 		try {
 			thisMsgServ = nUtil.getIntFromStringAndMsg(number);
@@ -97,7 +102,15 @@ public class ApiServices {
 					return Response.status(Response.Status.EXPECTATION_FAILED).build();
 			}
 		}
-		return Response.ok(number).build();
+		Prime prime = new Prime (numberInt,nowString());
+		return Response.ok(prime).build();
 	}
+	
+    private String nowString() {
+    	Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+    	SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+    	String result = sdf1.format(timestamp).toString();
+    	return result;
+    }
 
 }

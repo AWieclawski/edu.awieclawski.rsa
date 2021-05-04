@@ -46,8 +46,21 @@ the archive 'jaxrs-ri-2.25.1.zip' described as 'Jersey JAX-RS 2.0 RI bundle bund
 	  
 	http://localhost:8080/edu.awieclawski.rsa/rest/api/isprime/aa
 	  -> returns 'HTTP Status 406 - Not Acceptable';
-	  
-	  similarly:
- 
+
+
+==== JSON requirements: ====	
+1. Download jars from Maven repos:
+* jackson-annotations-2.2.3.jar
+* jackson-core-2.2.3.jar
+* jackson-databind-2.2.3.jar
+* jackson-jaxrs-base-2.2.3.jar
+* jackson-jaxrs-json-provider-2.2.3.jar
+* jackson-jaxrs-xml-provider-2.2.3.jar
+* jackson-module-jaxb-annotations-2.2.3.jar  
+2. add mentioned above jars (by right click on the Project)  
+ - to the 'BuildPath' > 'Libraries' of the Project 
+ - to the 'Properties' > 'Deployment Assembly'
+===== examples =====
+	   
 	http://localhost:8080/edu.awieclawski.rsa/rest/api/isprime_rj/29
-	  -> returns 29 as JSON;	
+	  -> returns {"value":29,"reqid":"20210504182903794"} as JSON;	 
