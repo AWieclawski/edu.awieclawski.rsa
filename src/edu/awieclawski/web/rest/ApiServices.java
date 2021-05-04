@@ -74,5 +74,30 @@ public class ApiServices {
 		}
 		return Response.ok(number).build();
 	}
+	
+	@GET
+	@Path("/isprime_rj/{number}") // return JSON
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response isPrimeJ(@PathParam("number") String number  ) {
+		Calculator calc = new Calculator();
+		NumberUtil nUtil = new NumberUtil();
+		MessageService thisMsgServ = MessageService.getNewMessageService();
+		int numberInt = -1;
+		try {
+			thisMsgServ = nUtil.getIntFromStringAndMsg(number);
+		} catch (NumberFormatException ex) {
+			LOGGER.log(Level.SEVERE, "getIntFromString failed. Received: " + number);
+		}
+		if (thisMsgServ != null) {
+			numberInt = thisMsgServ.getIntResult();
+			if (numberInt < 0) { // not integer
+				return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+			} else { // not prime
+				if (!calc.isPrimeNumber(numberInt))
+					return Response.status(Response.Status.EXPECTATION_FAILED).build();
+			}
+		}
+		return Response.ok(number).build();
+	}
 
 }
