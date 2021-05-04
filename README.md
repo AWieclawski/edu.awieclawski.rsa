@@ -1,7 +1,9 @@
 ====== edu.awieclawski.rsa ======
 
 ===== Description =====
+
 RSA key generator, use greatest common divisor, Euler's phi, coprime numbers
+(no Maven etc.)
 1. Comand-Line manager in edu.awieclawski.cmd.rsa.MainManager;
 2. Web-App in  edu.awieclawski.web.* (servlets,jsp,css,jstl);
 3. API Rest in edu.awieclawski.web.rest;
@@ -25,7 +27,7 @@ to the Project Java BuildPath libraries
 1. Download from: https://eclipse-ee4j.github.io/jersey/download.html
 the archive 'jaxrs-ri-2.25.1.zip' described as 'Jersey JAX-RS 2.0 RI bundle bundle contains the JAX-RS 2.0 API jar, all the core Jersey module jars as well as all the required 3rd-party dependencies.'
 2. Extract the archive and add (by right click on the Project): 
- - all the jars to the 'BuildPath' of the Project 
+ - all the jars to the 'BuildPath' > 'Libraries' tab of the Project 
  - all the jars to the 'Properties' > 'Deployment Assembly'
 3. Deploy, by 'Run on Server' in Eclipse.
 
