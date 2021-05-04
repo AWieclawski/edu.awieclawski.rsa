@@ -34,14 +34,14 @@ the archive 'jaxrs-ri-2.25.1.zip' described as 'Jersey JAX-RS 2.0 RI bundle bund
 	http://localhost:8080/edu.awieclawski.rsa/rest/api
 * get client Agent: 
 	 http://localhost:8080/edu.awieclawski.rsa/rest/api/agent
-* check if prime: 
-**
+* check if prime number: 
+
 	http://localhost:8080/edu.awieclawski.rsa/rest/api/isprime/29
 	  -> returns '29';
-**	  
+	  
 	http://localhost:8080/edu.awieclawski.rsa/rest/api/isprime/22
 	  -> returns 'HTTP Status 417 - Expectation Failed';
-**	  
+	  
 	 http://localhost:8080/edu.awieclawski.rsa/rest/api/isprime/aa
 	  -> returns 'HTTP Status 406 - Not Acceptable';
  
