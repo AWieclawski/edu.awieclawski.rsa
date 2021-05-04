@@ -60,6 +60,7 @@ the archive 'jaxrs-ri-2.25.1.zip' described as 'Jersey JAX-RS 2.0 RI bundle bund
 2. add mentioned above jars (by right click on the Project)  
  - to the 'BuildPath' > 'Libraries' of the Project 
  - to the 'Properties' > 'Deployment Assembly'
+ 
 ===== examples =====
 	   
 	http://localhost:8080/edu.awieclawski.rsa/rest/api/isprime_rj/29
