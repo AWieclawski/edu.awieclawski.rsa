@@ -61,7 +61,12 @@ the archive 'jaxrs-ri-2.25.1.zip' described as 'Jersey JAX-RS 2.0 RI bundle bund
  - to the 'BuildPath' > 'Libraries' of the Project 
  - to the 'Properties' > 'Deployment Assembly'
  
-===== examples =====
+=== examples ===
 	   
 	http://localhost:8080/edu.awieclawski.rsa/rest/api/isprime_rj/29
-	  -> returns {"value":29,"reqid":"20210504182903794"} as JSON;	 
+	  -> returns {"value":29,"reqid":"20210504182903794"} as JSON;	
+	  
+	curl --header "Content-Type: application/json" --request POST --data '{"modulusn":253,"pubkey":29}' http://localhost:8080/edu.awieclawski.rsa/rest/api/coprimes_rj
+	-> returns {"modulusn":253,"pubkey":29,"phin":220,"reqid":"20210504222925995"} as JSON;
+  
+  	   

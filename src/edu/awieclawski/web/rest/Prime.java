@@ -1,9 +1,15 @@
 package edu.awieclawski.web.rest;
 
+import java.io.Serializable;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class Prime {
+public class Prime implements Serializable {
+	/**
+	 * Model of Response
+	 */
+	private static final long serialVersionUID = 6237298250762821838L;
 	private long value;
 	private String reqid;
 
@@ -25,6 +31,11 @@ public class Prime {
 
 	public Prime() {
 		super();
+	}
+
+	public Prime(long value) {
+		super();
+		this.value = value;
 	}
 
 	public Prime(long value, String reqid) {

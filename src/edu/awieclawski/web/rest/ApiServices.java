@@ -8,12 +8,14 @@ import java.util.logging.Logger;
 import javax.ws.rs.core.Response;
 
 import edu.awieclawski.cmd.utils.Calculator;
+//import edu.awieclawski.exceptions.NoCoPrimesException;
 import edu.awieclawski.web.service.MessageService;
 import edu.awieclawski.web.utils.NumberUtil;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -77,16 +79,14 @@ public class ApiServices {
 		}
 		return Response.ok(number).build();
 	}
-	
+
 	@GET
 	@Path("/isprime_rj/{number}") // return JSON
-	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response isPrimeJ(@PathParam("number") String number  ) {
+	public Response isPrimeJ(@PathParam("number") String number) {
 		Calculator calc = new Calculator();
 		NumberUtil nUtil = new NumberUtil();
 		MessageService thisMsgServ = MessageService.getNewMessageService();
-//		Prime prime = new Prime();
 		int numberInt = -1;
 		try {
 			thisMsgServ = nUtil.getIntFromStringAndMsg(number);
@@ -102,15 +102,48 @@ public class ApiServices {
 					return Response.status(Response.Status.EXPECTATION_FAILED).build();
 			}
 		}
-		Prime prime = new Prime (numberInt,nowString());
+		Prime prime = new Prime(numberInt, nowString());
 		return Response.ok(prime).build();
 	}
-	
-    private String nowString() {
-    	Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-    	SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMddHHmmssSSS");
-    	String result = sdf1.format(timestamp).toString();
-    	return result;
-    }
+
+	@POST
+	@Path("/coprimes_rj") // return JSON
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response isCoPrimeJ(CoPrimes coprimes) {
+		Calculator calc = new Calculator();
+		NumberUtil nUtil = new NumberUtil();
+		MessageService thisMsgServ = MessageService.getNewMessageService();
+		int modN = -1;
+		int pubKey = -1;
+		int phiN = -1;
+		int numberInt = -1;
+		if ((Long) coprimes.getModulusn() != null)
+			modN = (int) coprimes.getModulusn();
+		if ((Long) coprimes.getPubkey() != null)
+			pubKey = (int) coprimes.getPubkey();
+		if ((Long) coprimes.getPhin() != null && (Long) coprimes.getModulusn() != null)
+			phiN = (int) calc.phiEuler(modN);
+		else
+			phiN = (int) coprimes.getPhin();
+		thisMsgServ = nUtil.getCoPrimeAndMsg(modN, pubKey, phiN);
+		if (thisMsgServ != null) {
+			numberInt = thisMsgServ.getIntResult();
+			if (numberInt < 0) { // not coprime
+				return Response.status(Response.Status.EXPECTATION_FAILED).build();
+			}
+		}
+		coprimes.setReqid(nowString());
+		if (phiN > 0)
+			coprimes.setPhin(phiN);
+		return Response.ok(coprimes).build();
+	}
+
+	private String nowString() {
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+		String result = sdf1.format(timestamp).toString();
+		return result;
+	}
 
 }
