@@ -30,6 +30,9 @@ the archive 'jaxrs-ri-2.25.1.zip' described as 'Jersey JAX-RS 2.0 RI bundle bund
  - to the 'BuildPath' > 'Libraries' tab  
  - to the 'Properties' > 'Deployment Assembly'
 3. Deploy, by 'Run on Server' in Eclipse.
+4. Put in section <Host> of 'server.xml' (Tomcat instance) following line:
+<Valve className="org.apache.catalina.valves.ErrorReportValve"  showReport="false"  showServerInfo="false" /> 
+<!-- to avoid html report as error responses. -->
 
 ==== examples: ====
 * visit Hello page at: 

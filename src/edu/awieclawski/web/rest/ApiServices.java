@@ -1,17 +1,18 @@
 package edu.awieclawski.web.rest;
 
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.ws.rs.core.Response;
 
 import edu.awieclawski.cmd.utils.Calculator;
-//import edu.awieclawski.exceptions.NoCoPrimesException;
+import edu.awieclawski.web.models.CoPrimes;
+import edu.awieclawski.web.models.Prime;
 import edu.awieclawski.web.service.MessageService;
 import edu.awieclawski.web.utils.NumberUtil;
+import edu.awieclawski.web.utils.TimeUtils;
 
+//import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
@@ -25,6 +26,9 @@ import javax.ws.rs.core.MediaType;
 public class ApiServices {
 	private final static Logger LOGGER = Logger.getLogger(ApiServices.class.getName());
 	private String packageName = "edu.awieclawski.rsa";
+
+//	@Inject
+	TimeUtils tUtils = new TimeUtils();
 
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
@@ -102,7 +106,7 @@ public class ApiServices {
 					return Response.status(Response.Status.EXPECTATION_FAILED).build();
 			}
 		}
-		Prime prime = new Prime(numberInt, nowString());
+		Prime prime = new Prime(numberInt, tUtils.nowString());
 		return Response.ok(prime).build();
 	}
 
@@ -118,14 +122,21 @@ public class ApiServices {
 		int pubKey = -1;
 		int phiN = -1;
 		int numberInt = -1;
+		
+//		LOGGER.log(Level.WARNING, "coprimes.getModulusn()=" + coprimes.getModulusn() + ",coprimes.getPubkey()="
+//				+ coprimes.getPubkey() + ",coprimes.getPhin()=" + coprimes.getPhin());
+		
 		if ((Long) coprimes.getModulusn() != null)
 			modN = (int) coprimes.getModulusn();
 		if ((Long) coprimes.getPubkey() != null)
 			pubKey = (int) coprimes.getPubkey();
-		if ((Long) coprimes.getPhin() != null && (Long) coprimes.getModulusn() != null)
-			phiN = (int) calc.phiEuler(modN);
-		else
+		if ((Long) coprimes.getPhin() != null)
 			phiN = (int) coprimes.getPhin();
+		if ((Long) coprimes.getPhin() == 0 && (Long) coprimes.getModulusn() != null)
+			phiN = (int) calc.phiEuler(modN);
+		
+//		LOGGER.log(Level.WARNING, "modN=" + modN + ",pubKey=" + pubKey + ",phiN=" + phiN);
+		
 		thisMsgServ = nUtil.getCoPrimeAndMsg(modN, pubKey, phiN);
 		if (thisMsgServ != null) {
 			numberInt = thisMsgServ.getIntResult();
@@ -133,17 +144,10 @@ public class ApiServices {
 				return Response.status(Response.Status.EXPECTATION_FAILED).build();
 			}
 		}
-		coprimes.setReqid(nowString());
+		coprimes.setReqid(tUtils.nowString());
 		if (phiN > 0)
 			coprimes.setPhin(phiN);
 		return Response.ok(coprimes).build();
-	}
-
-	private String nowString() {
-		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMddHHmmssSSS");
-		String result = sdf1.format(timestamp).toString();
-		return result;
 	}
 
 }

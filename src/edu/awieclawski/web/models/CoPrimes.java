@@ -1,4 +1,4 @@
-package edu.awieclawski.web.rest;
+package edu.awieclawski.web.models;
 
 import java.io.Serializable;
 

@@ -128,13 +128,13 @@ public class NumberUtil {
 				x = isCoPrimeCheck(phi, e);
 				result.setIntResult(x);
 			} catch (NoCoPrimesException ex) {
-				String errMsg = ex.getMessage() + ":[" + n + "," + e + "]";
+				String errMsg = ex.getMessage() + ":[" + phi + "," + e + "]";
 				result.setError(errMsg);
 				LOGGER.log(Level.WARNING, errMsg);
 				List<Integer> list = new ArrayList<>();
 				list = calc.phiList(phi, e);
 				if (list != null)
-					result.setInfo("List of few closest coprime numbers for n=" + n + ":" + list.toString());
+					result.setInfo("List of few closest coprime numbers for phi=" + phi + ":" + list.toString());
 			}
 		}
 		return result;
