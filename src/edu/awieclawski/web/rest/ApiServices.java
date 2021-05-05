@@ -122,21 +122,21 @@ public class ApiServices {
 		int pubKey = -1;
 		int phiN = -1;
 		int numberInt = -1;
-		
+
 //		LOGGER.log(Level.WARNING, "coprimes.getModulusn()=" + coprimes.getModulusn() + ",coprimes.getPubkey()="
 //				+ coprimes.getPubkey() + ",coprimes.getPhin()=" + coprimes.getPhin());
-		
-		if ((Long) coprimes.getModulusn() != null)
+
+		if ((Long) coprimes.getModulusn() > 0)
 			modN = (int) coprimes.getModulusn();
-		if ((Long) coprimes.getPubkey() != null)
+		if ((Long) coprimes.getPubkey() > 0)
 			pubKey = (int) coprimes.getPubkey();
-		if ((Long) coprimes.getPhin() != null)
+		if ((Long) coprimes.getPhin() > 0)
 			phiN = (int) coprimes.getPhin();
-		if ((Long) coprimes.getPhin() == 0 && (Long) coprimes.getModulusn() != null)
+		if ((Long) coprimes.getPhin() == 0 && (Long) coprimes.getModulusn() > 0)
 			phiN = (int) calc.phiEuler(modN);
-		
+
 //		LOGGER.log(Level.WARNING, "modN=" + modN + ",pubKey=" + pubKey + ",phiN=" + phiN);
-		
+
 		thisMsgServ = nUtil.getCoPrimeAndMsg(modN, pubKey, phiN);
 		if (thisMsgServ != null) {
 			numberInt = thisMsgServ.getIntResult();

@@ -31,10 +31,8 @@ the archive 'jaxrs-ri-2.25.1.zip' described as 'Jersey JAX-RS 2.0 RI bundle bund
  - to the 'Properties' > 'Deployment Assembly'
 3. Deploy, by 'Run on Server' in Eclipse.
 4. Put in section <Host> of 'server.xml' (Tomcat instance) following line:
-<code>
- &lt;Valve className="org.apache.catalina.valves.ErrorReportValve"  showReport="false"  showServerInfo="false" /&gt; 
-<!-- to avoid html report as error responses. -->
-</code>
+<code> &lt;Valve className="org.apache.catalina.valves.ErrorReportValve"  showReport="false"  showServerInfo="false" /&gt; </code>
+ - to avoid html report as error responses. 
 
 ==== examples: ====
 * visit Hello page at: 
@@ -43,13 +41,13 @@ the archive 'jaxrs-ri-2.25.1.zip' described as 'Jersey JAX-RS 2.0 RI bundle bund
 	 http://localhost:8080/edu.awieclawski.rsa/rest/api/agent
 * check if prime number: 
 
-	http://localhost:8080/edu.awieclawski.rsa/rest/api/isprime/29
+<code> http://localhost:8080/edu.awieclawski.rsa/rest/api/isprime/29 </code>
 	  -> returns '29';
 	  
-	http://localhost:8080/edu.awieclawski.rsa/rest/api/isprime/22
+<code> http://localhost:8080/edu.awieclawski.rsa/rest/api/isprime/22  </code>
 	  -> returns 'HTTP Status 417 - Expectation Failed';
 	  
-	http://localhost:8080/edu.awieclawski.rsa/rest/api/isprime/aa
+<code> http://localhost:8080/edu.awieclawski.rsa/rest/api/isprime/aa  </code>
 	  -> returns 'HTTP Status 406 - Not Acceptable';
 
 
@@ -67,14 +65,22 @@ the archive 'jaxrs-ri-2.25.1.zip' described as 'Jersey JAX-RS 2.0 RI bundle bund
  - to the 'Properties' > 'Deployment Assembly'
  
 === examples ===
-	   
-	http://localhost:8080/edu.awieclawski.rsa/rest/api/isprime_rj/29
+type in http browser:	   
+ <code>http://localhost:8080/edu.awieclawski.rsa/rest/api/isprime_rj/29 </code>
 	  -> returns {"value":29,"reqid":"20210504182903794"} as JSON;	
 	  
+type in cmdl:
+ <code>	  
 	curl --header "Content-Type: application/json" \
 	--request POST \
 	--data '{"modulusn":253,"pubkey":29}' \
-	http://localhost:8080/edu.awieclawski.rsa/rest/api/coprimes_rj
+	http://localhost:8080/edu.awieclawski.rsa/rest/api/coprimes_rj </code>
 	-> returns {"modulusn":253,"pubkey":29,"phin":220,"reqid":"20210504222925995"} as JSON;
-  
+ 
+ <code> curl --header "Content-Type: application/json" \
+ 	--request POST \
+ 	--data '{"phin":244,"pubkey":29}' \
+ 	http://localhost:8080/edu.awieclawski.rsa/rest/api/coprimes_rj </code>
+  	-> returns HTTP Status 417 - Expectation Failed
+
   	   
