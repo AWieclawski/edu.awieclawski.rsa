@@ -27,12 +27,12 @@ to the Project Java BuildPath libraries
 1. Download from: https://eclipse-ee4j.github.io/jersey/download.html
 the archive 'jaxrs-ri-2.25.1.zip' described as 'Jersey JAX-RS 2.0 RI bundle bundle contains the JAX-RS 2.0 API jar, all the core Jersey module jars as well as all the required 3rd-party dependencies.'
 2. Extract the archive and add all the jars (by mouse right click on the Project): 
- - to the 'BuildPath' > 'Libraries' tab  
+ - to the 'BuildPath' > 'Libraries' tab
  - to the 'Properties' > 'Deployment Assembly'
 3. Deploy, by 'Run on Server' in Eclipse.
 4. Put in section <Host> of 'server.xml' (Tomcat instance) following line:
 <code>
-<Valve className="org.apache.catalina.valves.ErrorReportValve"  showReport="false"  showServerInfo="false" /> 
+&lsaquo;Valve className="org.apache.catalina.valves.ErrorReportValve"  showReport="false"  showServerInfo="false" /&rsaquo; 
 <!-- to avoid html report as error responses. -->
 </code>
 
