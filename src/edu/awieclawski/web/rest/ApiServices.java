@@ -1,11 +1,15 @@
 package edu.awieclawski.web.rest;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.ws.rs.core.Response;
 
 import edu.awieclawski.cmd.utils.Calculator;
+import edu.awieclawski.cmd.utils.DeEncoder;
+import edu.awieclawski.web.models.Cluster;
 import edu.awieclawski.web.models.CoPrimes;
 import edu.awieclawski.web.models.Prime;
 import edu.awieclawski.web.service.MessageService;
@@ -25,7 +29,7 @@ import javax.ws.rs.core.MediaType;
 @Path("/api")
 public class ApiServices {
 	private final static Logger LOGGER = Logger.getLogger(ApiServices.class.getName());
-	private String packageName = "edu.awieclawski.rsa";
+	private String packageName = ApiServices.class.getPackage().toString();
 
 //	@Inject
 	TimeUtils tUtils = new TimeUtils();
@@ -148,6 +152,42 @@ public class ApiServices {
 		if (phiN > 0)
 			coprimes.setPhin(phiN);
 		return Response.ok(coprimes).build();
+	}
+
+	@POST
+	@Path("/encode_rj") // return JSON
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getEncode(Cluster cluster) {
+		Cluster encoded = new Cluster();
+		DeEncoder enc = new DeEncoder();
+		int modN = -1;
+		int key = -1;
+		String msg = "";
+		List<Integer> asciiList = new ArrayList<>();
+		List<Integer> encodedList = new ArrayList<>();
+
+		if ((Long) cluster.getModulusn() > 0)
+			modN = (int) cluster.getModulusn();
+
+		if ((Long) cluster.getKey() > 0)
+			key = (int) cluster.getKey();
+
+		if (cluster.getMessage() != null)
+			msg = cluster.getMessage();
+
+		if (msg != null)
+			asciiList = enc.getAsciiFromString(msg);
+
+		if (asciiList != null) {
+			encodedList = enc.getRSAfromInt(asciiList, key, modN);
+			encoded = cluster;
+			encoded.setEncoded(encodedList);
+			encoded.setReqid(tUtils.nowString());
+		} else
+			return Response.status(Response.Status.EXPECTATION_FAILED).build();
+// TODO catch org.glassfish.jersey.server.model.ModelValidationException:
+		return Response.ok(encoded).build();
 	}
 
 }
