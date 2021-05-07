@@ -16,7 +16,7 @@ import edu.awieclawski.web.service.MessageService;
 import edu.awieclawski.web.utils.NumberUtil;
 import edu.awieclawski.web.utils.TimeUtils;
 
-//import javax.inject.Inject;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
@@ -30,8 +30,13 @@ import javax.ws.rs.core.MediaType;
 public class ApiServices {
 	private final static Logger LOGGER = Logger.getLogger(ApiServices.class.getName());
 	private String packageName = ApiServices.class.getPackage().toString();
+	private final ApiUtils apiUtils;
 
-//	@Inject
+	@Inject
+	public ApiServices(ApiUtils apiUtils) {
+		this.apiUtils = apiUtils;
+	}
+
 	TimeUtils tUtils = new TimeUtils();
 
 	@GET
@@ -67,25 +72,12 @@ public class ApiServices {
 	@Path("/isprime/{number}")
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response isPrime(@PathParam("number") String number) {
-		Calculator calc = new Calculator();
-		NumberUtil nUtil = new NumberUtil();
-		MessageService thisMsgServ = MessageService.getNewMessageService();
-		int numberInt = -1;
-		try {
-			thisMsgServ = nUtil.getIntFromStringAndMsg(number);
-		} catch (NumberFormatException ex) {
-			LOGGER.log(Level.SEVERE, "getIntFromString failed. Received: " + number);
-		}
-		if (thisMsgServ != null) {
-			numberInt = thisMsgServ.getIntResult();
-			if (numberInt < 0) { // not integer
-				return Response.status(Response.Status.NOT_ACCEPTABLE).build();
-			} else { // not prime
-				if (!calc.isPrimeNumber(numberInt))
-					return Response.status(Response.Status.EXPECTATION_FAILED).build();
-			}
-		}
-		return Response.ok(number).build();
+		int numberInt = apiUtils.isPrime(number);
+		if (numberInt < 0) // not integer
+			return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+		if (numberInt == 0)
+			return Response.status(Response.Status.EXPECTATION_FAILED).build();
+		return Response.ok(numberInt).build();
 	}
 
 	@GET
