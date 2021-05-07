@@ -55,16 +55,16 @@ public class StepOne extends HttpServlet {
 			request.getRequestDispatcher("/welcome.jsp").forward(request, response);
 
 		// log list of Attributes
-		Enumeration<String> attributeNames;
-		if (session != null) {
-			attributeNames = session.getAttributeNames();
-			if (attributeNames.hasMoreElements())
-				LOGGER.log(Level.INFO, "\n ** Attribute List ** ");
-			while (attributeNames.hasMoreElements()) {
-				String tmpAttr = attributeNames.nextElement();
-				LOGGER.log(Level.INFO, " -- attribute=" + tmpAttr + ",value=" + session.getAttribute(tmpAttr));
-			}
-		}
+//		Enumeration<String> attributeNames;
+//		if (session != null) {
+//			attributeNames = session.getAttributeNames();
+//			if (attributeNames.hasMoreElements())
+//				LOGGER.log(Level.INFO, "\n ** Attribute List ** ");
+//			while (attributeNames.hasMoreElements()) {
+//				String tmpAttr = attributeNames.nextElement();
+//				LOGGER.log(Level.INFO, " -- attribute=" + tmpAttr + ",value=" + session.getAttribute(tmpAttr));
+//			}
+//		}
 
 		response.setContentType("text/html");
 		request.getRequestDispatcher("/pages/step_one.jsp").forward(request, response);

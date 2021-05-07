@@ -88,12 +88,11 @@ examples:
 	  
 - type in cmdl:
 
-<code> 
-curl --header "Content-Type: application/json" \
+<code> curl --header "Content-Type: application/json" \
 --request POST \
 --data '{"modulusn":253,"pubkey":29}' \
 http://localhost:8080/edu.awieclawski.rsa/rest/api/coprimes_rj </code>
-	
+
 -> returns {"modulusn":253,"pubkey":29,"phin":220,"reqid":"20210504222925995"} as JSON;
  
 <code> curl --header "Content-Type: application/json" \

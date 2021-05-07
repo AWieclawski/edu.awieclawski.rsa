@@ -64,16 +64,16 @@ public class StepTwo extends HttpServlet {
 			request.getRequestDispatcher("/welcome.jsp").forward(request, response);
 
 		// log list of Attributes
-		Enumeration<String> attributeNames;
-		if (session != null) {
-			attributeNames = session.getAttributeNames();
-			if (attributeNames.hasMoreElements())
-				LOGGER.log(Level.INFO, "\n ** Attribute List ** ");
-			while (attributeNames.hasMoreElements()) {
-				String tmpAttr = attributeNames.nextElement();
-				LOGGER.log(Level.INFO, " -- attribute=" + tmpAttr + ",value=" + session.getAttribute(tmpAttr));
-			}
-		}
+//		Enumeration<String> attributeNames;
+//		if (session != null) {
+//			attributeNames = session.getAttributeNames();
+//			if (attributeNames.hasMoreElements())
+//				LOGGER.log(Level.INFO, "\n ** Attribute List ** ");
+//			while (attributeNames.hasMoreElements()) {
+//				String tmpAttr = attributeNames.nextElement();
+//				LOGGER.log(Level.INFO, " -- attribute=" + tmpAttr + ",value=" + session.getAttribute(tmpAttr));
+//			}
+//		}
 
 		Integer p_A = (Integer) session.getAttribute(Attributes.P_NUM_A.getName());
 		Integer q_A = (Integer) session.getAttribute(Attributes.Q_NUM_A.getName());
@@ -155,14 +155,14 @@ public class StepTwo extends HttpServlet {
 			}
 
 		// log list of parameters
-		Map<String, String[]> params = request.getParameterMap();
-		LOGGER.log(Level.INFO, "\n ** Parameter List ** ");
-		Iterator<String> i = params.keySet().iterator();
-		while (i.hasNext()) {
-			String key = (String) i.next();
-			String value = ((String[]) params.get(key))[0];
-			LOGGER.log(Level.INFO, " --- parammeter=" + key + ",value=" + value);
-		}
+//		Map<String, String[]> params = request.getParameterMap();
+//		LOGGER.log(Level.INFO, "\n ** Parameter List ** ");
+//		Iterator<String> i = params.keySet().iterator();
+//		while (i.hasNext()) {
+//			String key = (String) i.next();
+//			String value = ((String[]) params.get(key))[0];
+//			LOGGER.log(Level.INFO, " --- parammeter=" + key + ",value=" + value);
+//		}
 
 		// pass-to logic
 		if (privateKey > 0 && request.getParameter(Attributes.TESTKEYS_A.getParam()) != null) {
