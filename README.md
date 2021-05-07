@@ -102,11 +102,13 @@ http://localhost:8080/edu.awieclawski.rsa/rest/api/coprimes_rj </code>
 	
 -> returns HTTP Status 417 - Expectation Failed
 
-<code>curl --header "Content-Type: application/json" \
+<code> curl --header "Content-Type: application/json" \
 --request POST \
 --data '{"modulusn":253,"key":29,"message":"ala ma kotA"}' \
 http://localhost:8080/edu.awieclawski.rsa/rest/api/encode_rj</code>
 
 -> returns {"modulusn":253,"key":29,"message":"ala ma kotA","encoded":[247,225,247,142,43,247,142,172,199,24,153],"reqid":"20210506202116153"}
 
-  	   
+<code> curl --header "Content-Type: application/json" \--request POST \--data '{"modulusn":266,"key":22,"message":"ala ma kotA"}' \http://localhost:8080/edu.awieclawski.rsa/rest/api/encode_rj </code>
+
+-> returns 	HTTP Status 406 - Not Acceptable   

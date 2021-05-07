@@ -27,6 +27,13 @@ public class CoPrimes implements Serializable {
 		this.reqid = reqid;
 	}
 
+	public CoPrimes(long modulusn, long pubkey, long phin) {
+		super();
+		this.modulusn = modulusn;
+		this.pubkey = pubkey;
+		this.phin = phin;
+	}
+
 	public CoPrimes(long modulusn, long pubkey, String reqid) {
 		super();
 		this.modulusn = modulusn;
