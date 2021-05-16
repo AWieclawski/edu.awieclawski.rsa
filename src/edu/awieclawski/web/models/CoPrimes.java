@@ -20,29 +20,22 @@ public class CoPrimes implements Serializable {
 	}
 
 	public CoPrimes(long modulusn, long pubkey, long phin, String reqid) {
-		super();
-		this.modulusn = modulusn;
-		this.pubkey = pubkey;
-		this.phin = phin;
+		this(modulusn, pubkey, phin);
 		this.reqid = reqid;
 	}
 
 	public CoPrimes(long modulusn, long pubkey, long phin) {
-		super();
-		this.modulusn = modulusn;
-		this.pubkey = pubkey;
+		this(modulusn, pubkey);
 		this.phin = phin;
 	}
 
 	public CoPrimes(long modulusn, long pubkey, String reqid) {
-		super();
-		this.modulusn = modulusn;
-		this.pubkey = pubkey;
+		this(modulusn, pubkey);
 		this.reqid = reqid;
 	}
 
 	public CoPrimes(long modulusn, long pubkey) {
-		super();
+		this();
 		this.modulusn = modulusn;
 		this.pubkey = pubkey;
 	}
@@ -106,12 +99,12 @@ public class CoPrimes implements Serializable {
 
 	@Override
 	public String toString() {
-		final StringBuilder sb = new StringBuilder();
+		final StringBuffer sb = new StringBuffer();
 		sb.append("Prime");
 		sb.append("{modulusn=").append(modulusn);
 		sb.append(", pubkey=").append(pubkey);
 		sb.append(", phin=").append(phin);
-		sb.append(", reqid='").append(reqid).append('\'');
+		sb.append(", reqid=").append(reqid);
 		sb.append('}');
 		return sb.toString();
 	}

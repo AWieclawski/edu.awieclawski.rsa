@@ -6,7 +6,7 @@ public class ApiConfig extends ResourceConfig {
 	public ApiConfig() {
 		// Resources / Custom providers
 		packages("edu.awieclawski.web.rest","com.fasterxml.jackson.jaxrs.json");
-		// Binder 
+		// Binder used for injection
 		register(new ApiBinder());
 	}
 

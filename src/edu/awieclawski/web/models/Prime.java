@@ -34,13 +34,12 @@ public class Prime implements Serializable {
 	}
 
 	public Prime(long value) {
-		super();
+		this();
 		this.value = value;
 	}
 
 	public Prime(long value, String reqid) {
-		super();
-		this.value = value;
+		this(value);
 		this.reqid = reqid;
 	}
 
@@ -66,10 +65,10 @@ public class Prime implements Serializable {
 
 	@Override
 	public String toString() {
-		final StringBuilder sb = new StringBuilder();
+		final StringBuffer sb = new StringBuffer();
 		sb.append("Prime");
 		sb.append("{value=").append(value);
-		sb.append(", reqid='").append(reqid).append('\'');
+		sb.append(", reqid=").append(reqid);
 		sb.append('}');
 		return sb.toString();
 	}

@@ -22,27 +22,20 @@ public class Cluster implements Serializable {
 	}
 
 	public Cluster(long modulusn, long key, String message) {
-		super();
+		this();
 		this.modulusn = modulusn;
 		this.key = key;
 		this.message = message;
 	}
 
 	public Cluster(long modulusn, long key, String message, String reqid) {
-		super();
-		this.modulusn = modulusn;
-		this.key = key;
-		this.message = message;
+		this(modulusn, key, message);
 		this.reqid = reqid;
 	}
-	
+
 	public Cluster(long modulusn, long key, String message, List<Integer> encoded, String reqid) {
-		super();
-		this.modulusn = modulusn;
-		this.key = key;
-		this.message = message;
+		this(modulusn, key, message, reqid);
 		this.encoded = encoded;
-		this.reqid = reqid;
 	}
 
 	@Override
@@ -101,7 +94,7 @@ public class Cluster implements Serializable {
 	public void setReqid(String reqid) {
 		this.reqid = reqid;
 	}
-	
+
 	public List<Integer> getEncoded() {
 		return encoded;
 	}
@@ -112,7 +105,14 @@ public class Cluster implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Cluster [modulusn=" + modulusn + ", key=" + key + ", message=" + message + ", reqid=" + reqid + "]";
+		final StringBuffer sb = new StringBuffer();
+		sb.append("Prime");
+		sb.append("{modulusn=").append(modulusn);
+		sb.append(", key=").append(key);
+		sb.append(", message=").append(message);
+		sb.append(", reqid=").append(reqid);
+		sb.append('}');
+		return sb.toString();
 	}
 
 }
