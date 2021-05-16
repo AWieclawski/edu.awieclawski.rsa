@@ -2,10 +2,13 @@ package edu.awieclawski.web.rest;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.inject.Singleton;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
 
 import edu.awieclawski.cmd.utils.Calculator;
@@ -13,7 +16,6 @@ import edu.awieclawski.cmd.utils.DeEncoder;
 import edu.awieclawski.web.models.Cluster;
 import edu.awieclawski.web.models.CoPrimes;
 import edu.awieclawski.web.models.Prime;
-//import edu.awieclawski.web.models.Prime;
 import edu.awieclawski.web.service.MessageService;
 import edu.awieclawski.web.utils.NumberUtil;
 import edu.awieclawski.web.utils.TimeUtils;
@@ -131,6 +133,19 @@ public class ApiUtils {
 					Response.Status.EXPECTATION_FAILED.toString() + "| Received:" + cluster.toString());
 		}
 		return encoded;
+	}
+
+	public List<String> getHeadersList(HttpHeaders headers) {
+		List<String> list = new ArrayList<>();
+		Map<String, List<String>> map = headers.getRequestHeaders();
+		for (Entry<String, List<String>> entry : map.entrySet()) {
+			String tmp = "";
+			if (entry.getValue() != null)
+				tmp = entry.getValue().toString();
+			list.add(new StringBuffer("").append(entry.getKey()).append("=").append(tmp).toString());
+		}
+		return list;
+
 	}
 
 }

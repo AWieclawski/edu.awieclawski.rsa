@@ -17,12 +17,14 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 
 @Path("/api")
 public class ApiServices {
 	private final static Logger LOGGER = Logger.getLogger(ApiServices.class.getName());
-	private String packageName = ApiServices.class.getPackage().toString();
+	private final String packageName = ApiServices.class.getPackage().toString();
 	private final ApiUtils apiUtils;
 
 	@Inject
@@ -57,8 +59,23 @@ public class ApiServices {
 	@Path("/agent")
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response getUserAgent(@HeaderParam("user-agent") String userAgent) {
-		LOGGER.log(Level.INFO, "User agent: {}", userAgent);
+		LOGGER.log(Level.INFO, "User agent: {" + userAgent + "}");
 		return Response.ok(userAgent).build();
+	}
+
+	@GET
+	@Path("/host")
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response getUserHost(@HeaderParam("host") String host) {
+		LOGGER.log(Level.INFO, "User host: {" + host + "}");
+		return Response.ok(host).build();
+	}
+
+	@GET
+	@Path("/headers")
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response getHeaders(@Context HttpHeaders headers) {
+		return Response.ok("headers list : " + apiUtils.getHeadersList(headers)).build();
 	}
 
 	@GET
