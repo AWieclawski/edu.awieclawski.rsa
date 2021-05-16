@@ -48,6 +48,14 @@ examples:
 * get client Agent: 
 
 <code>http://localhost:8080/edu.awieclawski.rsa/rest/api/agent</code>
+
+* get client Host: 
+
+<code>http://localhost:8080/edu.awieclawski.rsa/rest/api/host</code>
+
+* get client Headers: 
+
+<code>http://localhost:8080/edu.awieclawski.rsa/rest/api/headers</code>
 	 
 * check if prime number: 
 
