@@ -10,6 +10,7 @@ import edu.awieclawski.web.models.CoPrimes;
 import edu.awieclawski.web.models.Prime;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
@@ -66,16 +67,20 @@ public class ApiServices {
 	@GET
 	@Path("/host")
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response getUserHost(@HeaderParam("host") String host) {
-		LOGGER.log(Level.INFO, "User host: {" + host + "}");
-		return Response.ok(host).build();
+	public Response getUserHost(@Context HttpServletRequest request) {
+		LOGGER.log(Level.INFO, "User host: {" + request.getRemoteAddr() + "}");
+		return Response.ok(request.getRemoteAddr()).build();
 	}
 
 	@GET
 	@Path("/headers")
-	@Produces(MediaType.TEXT_PLAIN)
+//	@Produces(MediaType.TEXT_PLAIN)
+	@Produces(MediaType.APPLICATION_JSON)
 	public Response getHeaders(@Context HttpHeaders headers) {
-		return Response.ok("headers list : " + apiUtils.getHeadersList(headers)).build();
+		if (headers == null)
+			return Response.noContent().build();
+		LOGGER.log(Level.INFO, "Headers list {" + apiUtils.getHeadersList(headers) + "}");
+		return Response.ok(apiUtils.getHeadersList(headers)).build();
 	}
 
 	@GET
