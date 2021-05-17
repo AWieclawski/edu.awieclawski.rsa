@@ -3,7 +3,6 @@ package edu.awieclawski.web.rest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -138,12 +137,11 @@ public class ApiUtils {
 	public List<String> getHeadersList(HttpHeaders headers) {
 		List<String> list = new ArrayList<>();
 		Map<String, List<String>> map = headers.getRequestHeaders();
-		for (Entry<String, List<String>> entry : map.entrySet()) {
-			String tmp = "";
-			if (entry.getValue() != null)
-				tmp = entry.getValue().toString();
-			list.add(new StringBuffer("").append(entry.getKey()).append("=").append(tmp).toString());
-		}
+
+		map.forEach((k, v) -> {
+			list.add(k + ":" + v);
+		});
+
 		return list;
 
 	}
