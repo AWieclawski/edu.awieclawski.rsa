@@ -74,9 +74,8 @@ public class ApiServices {
 
 	@GET
 	@Path("/headers")
-//	@Produces(MediaType.TEXT_PLAIN)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getHeaders(@Context HttpHeaders headers) {
+	public Response getHeadersJ(@Context HttpHeaders headers) {
 		if (headers == null)
 			return Response.noContent().build();
 		LOGGER.log(Level.INFO, "Headers list {" + apiUtils.getHeadersList(headers) + "}");
