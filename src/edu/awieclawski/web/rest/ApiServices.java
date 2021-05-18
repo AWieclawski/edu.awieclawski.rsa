@@ -33,6 +33,9 @@ public class ApiServices {
 		this.apiUtils = apiUtils;
 	}
 
+	@Context
+	HttpServletRequest m_request;
+
 	// TODO catch org.glassfish.jersey.server.model.ModelValidationException:
 
 	@GET
@@ -68,8 +71,22 @@ public class ApiServices {
 	@Path("/host")
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response getUserHost(@Context HttpServletRequest request) {
-		LOGGER.log(Level.INFO, "User host: {" + request.getRemoteAddr() + "}");
-		return Response.ok(request.getRemoteAddr()).build();
+		String userIpAddress = "";
+		if (request != null)
+			userIpAddress = m_request.getRemoteAddr();
+		LOGGER.log(Level.INFO, "User host: {" + userIpAddress + "}");
+		return Response.ok(userIpAddress).build();
+	}
+
+	@GET
+	@Path("/hostnp")
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response getUserHostNoParam() {
+		String userIpAddress = "";
+		if (m_request != null)
+			userIpAddress = m_request.getRemoteAddr();
+		LOGGER.log(Level.INFO, "User host: {" + userIpAddress + "}");
+		return Response.ok(userIpAddress).build();
 	}
 
 	@GET
@@ -98,7 +115,10 @@ public class ApiServices {
 	@Path("/isprime_rj/{number}") // return JSON
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response isPrimeJ(@PathParam("number") String number) {
-		Prime prime = apiUtils.isPrimeJ(number);
+		String ip = "";
+		if (m_request != null)
+			ip = m_request.getRemoteAddr();
+		Prime prime = apiUtils.isPrimeJ(number, ip);
 		if (prime.getValue() < 0) // not integer
 			return Response.status(Response.Status.NOT_ACCEPTABLE).build();
 		if (prime.getValue() == 0)

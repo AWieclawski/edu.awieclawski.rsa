@@ -50,9 +50,9 @@ public class ApiUtils {
 		return numberInt;
 	}
 
-	public Prime isPrimeJ(String number) {
+	public Prime isPrimeJ(String number, String ip) {
 		int numberInt = isPrime(number);
-		Prime prime = new Prime(numberInt, tUtils.nowString());
+		Prime prime = new Prime(numberInt, tUtils.nowString() + "_" + ip);
 		return prime;
 	}
 
